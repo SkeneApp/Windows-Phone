@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="WhisprBeta.Common.MessageControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+    <Grid x:Name="LayoutRoot" Background="Black">
+        <Border x:Name="borderBottom" BorderBrush="#FF646464" BorderThickness="0" Margin="6,2,6,5" Background="#FF151515" Padding="14,3,14,6" CornerRadius="20" VerticalAlignment="Center" MinWidth="200">
+            <StackPanel Margin="0">
+                <TextBlock x:Name="textBlockMessage" TextWrapping="Wrap" Text="This is some message text. It can be pretty long and span multiple lines! Ha ha! That's all." Margin="2,2,2,0" FontSize="28" VerticalAlignment="Top" FontWeight="Light"/>
+                <TextBlock x:Name="textBlockDate" TextWrapping="Wrap" Text="Just now" HorizontalAlignment="Right" Foreground="#FF5D5D5D" FontWeight="Light"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

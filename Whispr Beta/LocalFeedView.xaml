@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="WhisprBeta.LocalFeedView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:WhisprBeta"
+    xmlns:common="clr-namespace:WhisprBeta.Common"
+    xmlns:feed="clr-namespace:WhisprBeta.LocalFeed"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="800" d:DesignWidth="480" Loaded="UserControl_Loaded">
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <local:SliderControl x:Name="RadiusSliderControl" UnitOfMeasure="m" MinimumValue="50" MaximumValue="500" Value="100" />
+        <feed:PendingMessagesControl x:Name="PendingMessages" Grid.Row="1"/>
+        <local:FeedControl x:Name="LocalFeed" Grid.Row="2"/>
+        <feed:FeedToolbar x:Name="Toolbar" Grid.Row="3"/>
+        <!-- Status overlay is last, so that it would appear above other controls on the screen. -->
+        <common:StatusOverlayControl x:Name="StatusOverlay" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="2" Tap="StatusOverlay_Tap" />
+    </Grid>
+</UserControl>

@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="WhisprBeta.LoadingScreenView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+    <Grid Background="Black">
+        <Grid.Resources>
+            <!-- Animates the loading screen's logo opacity. -->
+            <Storyboard x:Name="AnimVersionFadeIn">
+                <DoubleAnimation
+                    Storyboard.TargetName="XamlVersionText"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0.0" To="0.5" Duration="0:0:2"
+                    AutoReverse="False">
+                </DoubleAnimation>
+            </Storyboard>
+            <Storyboard x:Name="AnimVersionFadeOut">
+                <DoubleAnimation
+                    Storyboard.TargetName="XamlVersionText"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0.5" To="0.0" Duration="0:0:2"
+                    AutoReverse="False">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
+            <!-- Animates the loading screen's logo opacity. -->
+            <Storyboard x:Name="AnimLogoFadeIn">
+                <DoubleAnimation
+                    Storyboard.TargetName="LogoImage"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0.0" To="1.0" Duration="0:0:2"
+                    AutoReverse="False">
+                </DoubleAnimation>
+            </Storyboard>
+            <Storyboard x:Name="AnimLogoFadeOut">
+                <DoubleAnimation
+                    Storyboard.TargetName="LogoImage"
+                    Storyboard.TargetProperty="Opacity"
+                    From="1.0" To="0.0" Duration="0:0:2"
+                    AutoReverse="False">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Image Grid.Row="0" x:Name="LogoImage" Source="/Assets/icon300x300.png" Stretch="None" Opacity="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,-50" />
+        <TextBlock x:Name="XamlVersionText" Grid.Row="1" Margin="-20, 0, 0, 0" Text="Beta 0.7.0.0" HorizontalAlignment="Center" VerticalAlignment="Top" Opacity="1" FontWeight="Light" />
+    </Grid>
+</UserControl>
