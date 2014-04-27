@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Resources;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using WhisprBeta.Common;
-using WhisprBeta.Map;
 using WhisprBeta.Resources;
 using System.Collections;
 using WhisprBeta.Services;
 
 namespace WhisprBeta
 {
-    public partial class App : Application
+    public partial class App
     {
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
@@ -26,7 +23,6 @@ namespace WhisprBeta
         public static Backend Backend { get; set; }
         public static Location Location { get; set; }
         public static Status Status { get; set; }
-        public static bool LoadingScreenShown = false; // TODO remove this
 
         private static bool NoPreviousUserLocation = true;
 

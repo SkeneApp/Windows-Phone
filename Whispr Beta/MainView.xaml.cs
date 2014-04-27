@@ -7,20 +7,16 @@ namespace WhisprBeta
         public MainView()
         {
             InitializeComponent();
+            ShowLoadingScreen();
             LocalFeedView.MapButtonClicked += LocalFeedView_OnMapButtonClicked;
             MapView.FeedButtonClicked += MapView_OnFeedButtonClicked;
-            if (App.LoadingScreenShown == false)
-            {
-                LoadingScreen.Visibility = Visibility.Visible;
-                App.LoadingScreenShown = true;
-                var appVersion = System.Xml.Linq.XDocument.Load("WMAppManifest.xml").Root.Element("App").Attribute("Version").Value;
-                LoadingScreen.VersionText = "Beta " + appVersion;
-                LoadingScreen.StartAnimation();
-            }
-            else
-            {
-                LoadingScreen.Visibility = Visibility.Collapsed;
-            }
+        }
+
+        private void ShowLoadingScreen()
+        {
+            var appVersion = System.Xml.Linq.XDocument.Load("WMAppManifest.xml").Root.Element("App").Attribute("Version").Value;
+            LoadingScreen.VersionText = "Beta " + appVersion;
+            LoadingScreen.StartAnimation();
         }
 
         private void LocalFeedView_OnMapButtonClicked()
