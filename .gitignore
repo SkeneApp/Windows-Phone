@@ -1,3 +1,4 @@
 Whispr Beta/Bin/
 Whispr Beta/obj/
 *.csproj.user
+*.suo
