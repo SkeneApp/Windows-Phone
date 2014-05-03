@@ -12,18 +12,44 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="800" d:DesignWidth="480" Loaded="UserControl_Loaded">
 
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition />
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <local:SliderControl x:Name="RadiusSliderControl" UnitOfMeasure="m" MinimumValue="50" MaximumValue="500" Value="100" />
-        <feed:PendingMessagesControl x:Name="PendingMessages" Grid.Row="1"/>
-        <local:FeedControl x:Name="LocalFeed" Grid.Row="2"/>
-        <feed:FeedToolbar x:Name="Toolbar" Grid.Row="3"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <local:SliderControl x:Name="RadiusSliderControl" UnitOfMeasure="m" Grid.ColumnSpan="3" MinimumValue="50" MaximumValue="500" Value="100" />
+        <TextBlock Text="Talking in" Grid.Row="1" Grid.ColumnSpan="3" Foreground="#FF5D5D5D" HorizontalAlignment="Center" FontSize="13"/>
+        <TextBlock x:Name="localRoom" Grid.ColumnSpan="3" Text="Turku, Finland" Grid.Row="2" Foreground="#FF5D5D5D" HorizontalAlignment="Center" Tap="localRoom_Tap" />
+        <StackPanel x:Name="roomList" Grid.Row="3" Grid.ColumnSpan="3" Tap="roomList_Tap" Visibility="Collapsed">
+            <StackPanel.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFD4D6E4" Offset="1"/>
+                    <GradientStop Color="White"/>
+                </LinearGradientBrush>
+            </StackPanel.Background>
+            <TextBlock Text="Go local" Foreground="#FF5D5D5D" Height="38" Margin="10,0,0,0"/>
+            <TextBlock Text="Available rooms:" Foreground="#FF5D5D5D" Margin="10,0,0,0"/>
+            <TextBlock Text="MercaTalks" Foreground="#FF5D5D5D" Margin="189,0,0,0" Height="33"/>
+            <TextBlock Text="Monttu" Foreground="#FF5D5D5D" Margin="189,0,0,0" Height="33"/>
+            <TextBlock Text="Assari" Foreground="#FF5D5D5D" Margin="189,0,0,0" Height="33"/>
+            <TextBlock Text="Privaatti" Foreground="#FF5D5D5D" Margin="189,0,0,0" Height="33"/>
+        </StackPanel>
+        <Image x:Name="refreshIcon" Source="/Assets/Very-Basic-Refresh-icon.png" Width="30" Grid.Column="2" Margin="71,19,49,118" Grid.Row="3" Opacity="0.7" Visibility="Collapsed"/>
+        <Image x:Name="lockIcon" Source="/Assets/padlock-closed.png" Width="20" Grid.Column="1" Margin="121,170,19,22" Grid.Row="3" Grid.RowSpan="2" Visibility="Collapsed"/>
+        <feed:PendingMessagesControl x:Name="PendingMessages" Grid.ColumnSpan="3" Grid.Row="4"/>
+        <local:FeedControl x:Name="LocalFeed" Grid.ColumnSpan="3" Grid.Row="5"/>
+        <feed:FeedToolbar x:Name="Toolbar" Grid.ColumnSpan="3" Grid.Row="6"/>
         <!-- Status overlay is last, so that it would appear above other controls on the screen. -->
-        <common:StatusOverlayControl x:Name="StatusOverlay" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="2" Tap="StatusOverlay_Tap" />
+        <common:StatusOverlayControl x:Name="StatusOverlay" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="3" Tap="StatusOverlay_Tap" />
     </Grid>
 </UserControl>

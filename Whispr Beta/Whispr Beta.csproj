@@ -211,9 +211,21 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\back-icon.png" />
+    <Content Include="Assets\Button_20-128.png" />
+    <Content Include="Assets\chat-add-alt-480.png" />
+    <Content Include="Assets\Flame-512.png" />
     <Content Include="Assets\icon300x300.png" />
+    <Content Include="Assets\location-me.png" />
+    <Content Include="Assets\location_icon.png" />
+    <Content Include="Assets\Maps-and-Geolocation-Map-marker-icon.png" />
+    <Content Include="Assets\message_bg.jpg" />
+    <Content Include="Assets\message_bg.png" />
+    <Content Include="Assets\message_options.jpg" />
+    <Content Include="Assets\padlock-closed.png" />
     <Content Include="Assets\tile_image_medium_336x336.png" />
     <Content Include="Assets\tile_image_small_159x159.png" />
+    <Content Include="Assets\Very-Basic-Refresh-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.resx">

@@ -9,11 +9,38 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="480" d:DesignWidth="480">
 
-    <Grid x:Name="LayoutRoot" Background="Black">
-        <Border x:Name="borderBottom" BorderBrush="#FF646464" BorderThickness="0" Margin="6,2,6,5" Background="#FF151515" Padding="14,3,14,6" CornerRadius="20" VerticalAlignment="Center" MinWidth="200">
+    <Grid x:Name="LayoutRoot" Background="White" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" x:Name="borderBottom" BorderBrush="#FF464646" Margin="0,2,2,2" BorderThickness="0" Padding="18,0,0,0" CornerRadius="0" VerticalAlignment="Center" MinWidth="200" Tap="borderBottom_Tap" Hold="borderBottom_Hold">
+            <Border.Background>
+                <ImageBrush ImageSource="/Assets/message_bg.png"/>
+            </Border.Background>
             <StackPanel Margin="0">
-                <TextBlock x:Name="textBlockMessage" TextWrapping="Wrap" Text="This is some message text. It can be pretty long and span multiple lines! Ha ha! That's all." Margin="2,2,2,0" FontSize="28" VerticalAlignment="Top" FontWeight="Light"/>
-                <TextBlock x:Name="textBlockDate" TextWrapping="Wrap" Text="Just now" HorizontalAlignment="Right" Foreground="#FF5D5D5D" FontWeight="Light"/>
+                <TextBlock x:Name="textBlockHandle" TextWrapping="Wrap" Margin="361,0,0,0" Text="Gringo65" Foreground="#FF5D5D5D" FontSize="13" HorizontalAlignment="Right" Padding="0,0,5,0"/>
+                <TextBlock x:Name="textBlockMessage" TextWrapping="Wrap" Text="Your text here" Foreground="#FF5D5D5D" FontSize="28" VerticalAlignment="Center" Tap="textBlockMessage_Tap" Margin="0,0,37,0" />
+                <TextBlock x:Name="textBlockDate" TextWrapping="Wrap" Text="Just now" HorizontalAlignment="Right" Foreground="#FF5D5D5D" FontWeight="Light" FontSize="13" Padding="0,0,5,0"/>
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="1" x:Name="borderMiddle" BorderBrush="#FF464646" Margin="0,2,2,2" BorderThickness="0" Padding="18,0,0,0" Visibility="Collapsed" CornerRadius="0" VerticalAlignment="Center" MinWidth="200" Tap="borderMiddle_Tap" >
+            <Border.Background>
+                <ImageBrush ImageSource="/Assets/message_bg.png"/>
+            </Border.Background>
+            <StackPanel Margin="0">
+                <TextBlock x:Name="reportHandle" TextWrapping="Wrap" Margin="361,0,0,0" Text="Gringo65" Foreground="#FF5D5D5D" FontSize="13" HorizontalAlignment="Right"/>
+                <TextBlock x:Name="reportMessage" TextWrapping="Wrap" FontSize="20" HorizontalAlignment="Center" Text="Tap to report this message" Foreground="#FF5D5D5D" Margin="0,0,37,0"/>
+                <TextBlock x:Name="reportDate" TextWrapping="Wrap" Text="Just now" HorizontalAlignment="Right" Foreground="#FF5D5D5D" FontWeight="Light" FontSize="13" Padding="0,0,5,0"/>
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="2" x:Name="borderBottom2" Margin="0,-5,2,2" BorderBrush="#FF464646" BorderThickness="0" Padding="30,3,14,6" CornerRadius="0" VerticalAlignment="Center" MinWidth="200" Tap="borderBottom2_Tap" Visibility="Collapsed" >
+            <Border.Background>
+                <ImageBrush Stretch="None" ImageSource="/Assets/message_options.jpg"/>
+            </Border.Background>
+            <StackPanel Margin="0" >
+                <TextBlock x:Name="textBlockOptions" TextWrapping="Wrap" Text="Comment/See full conversation            See location            Favorite" Margin="2,2,2,3" Foreground="#FF5D5D5D" FontSize="15" VerticalAlignment="Top" FontWeight="Light"/>
             </StackPanel>
         </Border>
     </Grid>

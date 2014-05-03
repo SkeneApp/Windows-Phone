@@ -10,7 +10,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="800" d:DesignWidth="480" Loaded="UserControl_Loaded">
 
-    <Grid x:Name="LayoutRoot" Background="Black">
+    <Grid x:Name="LayoutRoot" Background="#FFD6D4E4">
         <Grid.RenderTransform>
             <TranslateTransform x:Name="LayoutRootTransform" />
         </Grid.RenderTransform>
@@ -23,14 +23,20 @@
 
         <local:FeedControl x:Name="RemoteFeed" Grid.Row="1"/>
 
-        <Grid x:Name="ContentGrid" Grid.Row="1">
+        <Grid x:Name="ContentGrid" Grid.Row="1" Background="#FFD6D4E4">
             <Grid.RenderTransform>
                 <TranslateTransform x:Name="LayoutTransform" />
             </Grid.RenderTransform>
             <Grid.RowDefinitions>
-                <RowDefinition Height="60"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="80"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
             <!-- Hack explanation:
                  The grip has to be inside a scrollViwer, because without the scrollviewer
                  all the manipulations events would go *through* the grip and into
@@ -38,11 +44,16 @@
                  drag the grip, it would actually scroll the FeedControl scrollViewer underneath
                  it. The only solution to this is to place this little scrollviewer here,
                  and catch the dragging manipulation events throug it. -->
-            <ScrollViewer x:Name="Grip" VerticalScrollBarVisibility="Disabled" ManipulationDelta="Grip_ManipulationDelta" ManipulationCompleted="Grip_ManipulationCompleted" MouseLeftButtonDown="Grip_MouseLeftButtonDown">
+            <ScrollViewer x:Name="Grip" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Disabled" ManipulationDelta="Grip_ManipulationDelta" ManipulationCompleted="Grip_ManipulationCompleted" MouseLeftButtonDown="Grip_MouseLeftButtonDown" Background="#FFD6D4E4">
                 <local:SliderGrip/>
             </ScrollViewer>
-            <local:WhisprMap x:Name="Map" Grid.Row="1" />
+            <Border BorderBrush="#FF5D5D5D" BorderThickness="0,.5,0,0" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
+            <local:WhisprMap x:Name="Map" Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
+            <Image Source="/Assets/flame-512.png" Grid.Row="1" Grid.Column="0" Width="40" Margin="0,0,180,0" VerticalAlignment="Bottom"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Hottest" Foreground="#FF5D5D5D" VerticalAlignment="Bottom" Margin="50,0,0,0" />
+            <Image Source="/Assets/chat-add-alt-480.png" Grid.Row="2" Grid.Column="0" Width="40" Margin="0,0,180,0" VerticalAlignment="Bottom"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Newest" Foreground="#FF5D5D5D" VerticalAlignment="Bottom" Margin="50,0,0,0" />
         </Grid>
-        <local:MapToolbar x:Name="Toolbar" Grid.Row="2"/>
-        </Grid>
+        <local:MapToolbar x:Name="Toolbar" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0,0,0"/>
+    </Grid>
 </UserControl>

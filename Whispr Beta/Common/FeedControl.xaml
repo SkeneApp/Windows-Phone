@@ -8,9 +8,9 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="480" d:DesignWidth="480">
-    
-    <Grid x:Name="LayoutRoot">
-        <ScrollViewer x:Name="scrollViewer" BorderThickness="0" BorderBrush="{x:Null}">
+                                                           <!-- BorderBrush="{x:Null}" -->
+    <Grid x:Name="LayoutRoot" Background="White">
+        <ScrollViewer x:Name="scrollViewer" BorderThickness="0" BorderBrush="White">
             <StackPanel x:Name="stackPanelScroll"/>
         </ScrollViewer>
     </Grid>

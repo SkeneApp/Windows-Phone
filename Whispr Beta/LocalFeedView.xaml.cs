@@ -26,7 +26,7 @@ namespace WhisprBeta
             RadiusSliderControl.ValueChanged += RadiusSliderControl_ValueChanged;
             Toolbar.MapButtonClicked += Toolbar_MapButtonClicked;
             Toolbar.PublishButtonClicked += Toolbar_PublishButtonClicked;
-            Toolbar.PublishDelayChanged += Toolbar_PublishDelayChanged;
+          //  Toolbar.PublishDelayChanged += Toolbar_PublishDelayChanged;
             LocalFeed.Tap += LocalFeed_Tap;
         }
 
@@ -46,7 +46,7 @@ namespace WhisprBeta
             App.Backend.LocalWhisprsUpdated += Backend_LocalWhisprsUpdated;
             App.Location.RadiusChanged += Location_RadiusChanged;
             App.Location.UserLocationChanged += Location_UserLocationChanged;
-            Toolbar.PublishDelay = App.Backend.PublishDelay;
+       //     Toolbar.PublishDelay = App.Backend.PublishDelay;
         }
         private void OnNavigatedFrom()
         {
@@ -171,6 +171,20 @@ namespace WhisprBeta
                 StatusOverlay.Show(App.Status.CurrentStatus);
             }
             OnNavigatedTo();
+        }
+
+        private void roomList_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            roomList.Visibility = System.Windows.Visibility.Collapsed;
+            lockIcon.Visibility = System.Windows.Visibility.Collapsed;
+            refreshIcon.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        private void localRoom_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            roomList.Visibility = System.Windows.Visibility.Visible;
+            lockIcon.Visibility = System.Windows.Visibility.Visible;
+            refreshIcon.Visibility = System.Windows.Visibility.Visible;
         }
     }
 }

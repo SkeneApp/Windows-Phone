@@ -8,10 +8,10 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="480" d:DesignWidth="480">
-    
-    <Grid x:Name="LayoutRoot">
-        <Border Background="#7F000000" >
-            <TextBlock x:Name="MessageTextBlock" Text="Message goes here and if it's too long it should wrap." VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" FontSize="24" Margin="10,0" />
+
+    <Grid x:Name="LayoutRoot" Background="White">
+        <Border Background="White" >
+            <TextBlock x:Name="MessageTextBlock" Text="Message goes here and if it's too long it should wrap." Foreground="#FF5D5D5D" VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" FontSize="24" Margin="10,0" />
         </Border>
     </Grid>
 </UserControl>

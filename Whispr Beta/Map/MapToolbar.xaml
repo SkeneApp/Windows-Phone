@@ -8,15 +8,23 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="480" d:DesignWidth="480">
-    
+
     <Grid x:Name="LayoutRoot">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Border Grid.ColumnSpan="2" Background="Black" BorderBrush="#FF4C4C4C" BorderThickness="0,1,0,0" CornerRadius="5" />
-        <Rectangle Grid.ColumnSpan="2" Fill="Black" Margin="0,5,0,0"/>
-        <Button Height="75" Content="Feed" Margin="-5, 0, -10, 0" Grid.Column="0" x:Name="buttonBack" Click="buttonBack_Click" BorderThickness="1" Template="{StaticResource RoundedButtonTemplate}"/>
-        <Button Content="My location" Margin="0, 0, 0, 0" Grid.Column="1" x:Name="buttonMyLocation" Click="buttonMyLocation_Click" BorderThickness="1" Template="{StaticResource RoundedButtonTemplate}" FontWeight="Light"/>
+        <Border Grid.ColumnSpan="2" Background="Transparent" BorderBrush="Transparent" BorderThickness="0,1,0,0" CornerRadius="5" />
+        <Rectangle Grid.ColumnSpan="2" Fill="Transparent" Margin="0,5,0,0"/>
+        <Button Height="75" FontWeight="Medium" BorderBrush="Transparent" Foreground="#FF5D5D5D" Width="100" HorizontalAlignment="Left" Margin="-5, 0, -10, 0" Grid.Column="0" x:Name="buttonBack" Click="buttonBack_Click" BorderThickness="1" Template="{StaticResource RoundedButtonTemplate}">
+            <Button.Background>
+                <ImageBrush Stretch="Fill" ImageSource="/Assets/back-icon.png"/>
+            </Button.Background>
+        </Button>
+        <Button  BorderBrush="Transparent" Foreground="#FF5D5D5D" Width="100" Height="75" HorizontalAlignment="Right" Margin="0, 0, 0, 0" Grid.Column="1" x:Name="buttonMyLocation" Click="buttonMyLocation_Click" BorderThickness="1" Template="{StaticResource RoundedButtonTemplate}">
+            <Button.Background>
+                <ImageBrush Stretch="Fill" ImageSource="/Assets/location-me.png"/>
+            </Button.Background>
+        </Button>
     </Grid>
 </UserControl>

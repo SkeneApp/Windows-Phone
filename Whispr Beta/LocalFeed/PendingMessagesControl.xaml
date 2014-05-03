@@ -8,10 +8,10 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="480" d:DesignWidth="480">
-    
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Border x:Name="Border" BorderBrush="#FF7F7F7F" BorderThickness="1" Padding="14,6,14,8" CornerRadius="10" HorizontalAlignment="Center" Margin="0,6">
-            <TextBlock Text="2 whisprs pending" x:Name="TextBlockMessage" Foreground="#FF7F7F7F" />
+
+    <Grid x:Name="LayoutRoot" Background="White">
+        <Border x:Name="Border" BorderBrush="#FFD6D4E4" Background="White" BorderThickness="1" Padding="14,6,14,8" CornerRadius="10" HorizontalAlignment="Center" Margin="0,6">
+            <TextBlock Text="2 whisprs pending" x:Name="TextBlockMessage" Foreground="#FF5D5D5D" />
         </Border>
     </Grid>
 </UserControl>

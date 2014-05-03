@@ -15,7 +15,7 @@
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True" BackKeyPress="PhoneApplicationPage_BackKeyPress">
 
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="White">
         <local:LocalFeedView x:Name="LocalFeedView" />
         <local:MapView x:Name="MapView" />
         <local:LoadingScreenView x:Name="LoadingScreen" />

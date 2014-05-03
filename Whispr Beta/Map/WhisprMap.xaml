@@ -8,9 +8,9 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="633" d:DesignWidth="480">
+    d:DesignHeight="650" d:DesignWidth="480">
     
     <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
-        <maps:Map Margin="0" x:Name="map" Tap="map_Tap" ZoomLevelChanged="map_ZoomLevelChanged" Height="633" Width="480" BorderThickness="1,0" BorderBrush="Black"/>
+        <maps:Map Margin="0" x:Name="map" Tap="map_Tap" ZoomLevelChanged="map_ZoomLevelChanged" Height="650" Width="480"/>
     </Grid>
 </UserControl>

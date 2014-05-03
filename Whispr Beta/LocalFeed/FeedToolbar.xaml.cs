@@ -15,7 +15,7 @@ namespace WhisprBeta.LocalFeed
         public event PublishDelayChangedEventHandler PublishDelayChanged;
 
         private bool placeholderTextVisible = false;
-        private const string PlaceholderText = "Tap to whispr";
+        private const string PlaceholderText = "What's on your mind?";
         private const int MaximumWhisprCharacters = 160;
         private bool newMessagePanelVisible = false;
 
@@ -32,17 +32,18 @@ namespace WhisprBeta.LocalFeed
             set { textBoxInput.Text = value; }
         }
 
-        public TimeSpan PublishDelay
+     /*   public TimeSpan PublishDelay
         {
             get { return TimeSpan.FromMinutes(DelaySliderControl.Value); }
             set { DelaySliderControl.Value = value.Minutes; }
-        }
+        } */
 
         public FeedToolbar()
         {
             InitializeComponent();
             textBoxInput.MaxLength = MaximumWhisprCharacters;
-            DelaySliderControl.ValueChanged += DelaySliderControl_ValueChanged;
+            textBoxInput.FontSize = 20;
+          //  DelaySliderControl.ValueChanged += DelaySliderControl_ValueChanged;
             ShowPlaceholderText();
         }
 
@@ -58,15 +59,31 @@ namespace WhisprBeta.LocalFeed
             placeholderTextVisible = false;
         }
 
+        public void HideMapButton()
+        {
+            buttonMap.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        public void ShowMapButton()
+        {
+            buttonMap.Visibility = System.Windows.Visibility.Visible;
+        }
+
+
         public void ShowNewMessagePanel()
         {
-            if (newMessagePanelVisible) return;
+           // if (newMessagePanelVisible) return;
 
+            HideMapButton();
             gridPublishTools.Visibility = Visibility.Visible;
-            DelaySliderControl.Visibility = Visibility.Visible;
+            handleCHeck.Visibility = Visibility.Visible;
+            delayTimer.Visibility = Visibility.Visible;
+          //  DelaySliderControl.Visibility = Visibility.Visible;
             //Grid.SetRowSpan(scrollViewer, 1);
-            Grid.SetColumnSpan(textBoxInput, 1);
+            Grid.SetColumn(textBoxInput, 0);
+            Grid.SetColumnSpan(textBoxInput, 2);
             newMessagePanelVisible = true;
+
         }
 
         public void HideNewMessagePanel()
@@ -78,10 +95,14 @@ namespace WhisprBeta.LocalFeed
                 ShowPlaceholderText();
             }
             gridPublishTools.Visibility = Visibility.Collapsed;
-            DelaySliderControl.Visibility = Visibility.Collapsed;
+            handleCHeck.Visibility = Visibility.Collapsed;
+            delayTimer.Visibility = Visibility.Collapsed;
+          //  DelaySliderControl.Visibility = Visibility.Collapsed;
             //Grid.SetRowSpan(scrollViewer, 2);
+            Grid.SetColumn(textBoxInput, 1);
             Grid.SetColumnSpan(textBoxInput, 2);
             newMessagePanelVisible = false;
+            ShowMapButton();
         }
 
         private void buttonPublish_Click(object sender, RoutedEventArgs e)
@@ -93,6 +114,13 @@ namespace WhisprBeta.LocalFeed
                 PublishButtonClicked(MessageText);
             }
             ShowPlaceholderText();
+            ShowMapButton();
+            Grid.SetColumn(textBoxInput, 1);
+            Grid.SetColumnSpan(textBoxInput, 2);
+            gridPublishTools.Visibility = Visibility.Collapsed;
+            handleCHeck.Visibility = Visibility.Collapsed;
+            delayTimer.Visibility = Visibility.Collapsed;
+          //  DelaySliderControl.Visibility = Visibility.Collapsed;
         }
 
         private void buttonMap_Click(object sender, RoutedEventArgs e)
@@ -110,7 +138,7 @@ namespace WhisprBeta.LocalFeed
                 HidePlaceholderText();
             }
             ShowNewMessagePanel();
-        }
+        } 
 
         private void textBoxInput_SizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -129,13 +157,13 @@ namespace WhisprBeta.LocalFeed
             SetNumCharsText(((TextBox)sender).Text.Length);
         }
 
-        private void DelaySliderControl_ValueChanged(int value)
+       /* private void DelaySliderControl_ValueChanged(int value)
         {
             if (PublishDelayChanged != null)
             {
                 PublishDelayChanged(PublishDelay);
             }
-        }
+        } */
 
         public void SetNumCharsText(int charactersEntered)
         {
