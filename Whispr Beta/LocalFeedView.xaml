@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="WhisprBeta.LocalFeedView"
+﻿<UserControl
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,50 +6,79 @@
     xmlns:local="clr-namespace:WhisprBeta"
     xmlns:common="clr-namespace:WhisprBeta.Common"
     xmlns:feed="clr-namespace:WhisprBeta.LocalFeed"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone" x:Class="WhisprBeta.LocalFeedView"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="800" d:DesignWidth="480" Loaded="UserControl_Loaded">
 
-    <Grid x:Name="LayoutRoot" Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition />
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <local:SliderControl x:Name="RadiusSliderControl" UnitOfMeasure="m" Grid.ColumnSpan="3" MinimumValue="50" MaximumValue="500" Value="100" />
-        <TextBlock Text="Talking in" Grid.Row="1" Grid.ColumnSpan="3" Foreground="#FF5D5D5D" HorizontalAlignment="Center" FontSize="13"/>
-        <TextBlock x:Name="localRoom" Grid.ColumnSpan="3" Text="Turku, Finland" Grid.Row="2" Foreground="#FF5D5D5D" HorizontalAlignment="Center" Tap="localRoom_Tap" />
-        <StackPanel x:Name="roomList" Grid.Row="3" Grid.ColumnSpan="3" Tap="roomList_Tap" Visibility="Collapsed">
-            <StackPanel.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFD4D6E4" Offset="1"/>
-                    <GradientStop Color="White"/>
-                </LinearGradientBrush>
-            </StackPanel.Background>
-            <TextBlock Text="Go local" Foreground="#FF5D5D5D" Height="38" Margin="10,0,0,0"/>
-            <TextBlock Text="Available rooms:" Foreground="#FF5D5D5D" Margin="10,0,0,0"/>
-            <TextBlock Text="MercaTalks" Foreground="#FF5D5D5D" Margin="189,0,0,0" Height="33"/>
-            <TextBlock Text="Monttu" Foreground="#FF5D5D5D" Margin="189,0,0,0" Height="33"/>
-            <TextBlock Text="Assari" Foreground="#FF5D5D5D" Margin="189,0,0,0" Height="33"/>
-            <TextBlock Text="Privaatti" Foreground="#FF5D5D5D" Margin="189,0,0,0" Height="33"/>
-        </StackPanel>
-        <Image x:Name="refreshIcon" Source="/Assets/Very-Basic-Refresh-icon.png" Width="30" Grid.Column="2" Margin="71,19,49,118" Grid.Row="3" Opacity="0.7" Visibility="Collapsed"/>
-        <Image x:Name="lockIcon" Source="/Assets/padlock-closed.png" Width="20" Grid.Column="1" Margin="121,170,19,22" Grid.Row="3" Grid.RowSpan="2" Visibility="Collapsed"/>
-        <feed:PendingMessagesControl x:Name="PendingMessages" Grid.ColumnSpan="3" Grid.Row="4"/>
-        <local:FeedControl x:Name="LocalFeed" Grid.ColumnSpan="3" Grid.Row="5"/>
-        <feed:FeedToolbar x:Name="Toolbar" Grid.ColumnSpan="3" Grid.Row="6"/>
-        <!-- Status overlay is last, so that it would appear above other controls on the screen. -->
-        <common:StatusOverlayControl x:Name="StatusOverlay" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="3" Tap="StatusOverlay_Tap" />
-    </Grid>
+    <phone:Pivot HorizontalAlignment="Left" Height="800" Title="SKENE" VerticalAlignment="Top" Width="480" Foreground="White" Background="White">
+        <phone:PivotItem CacheMode="{x:Null}" Header="Feed" Margin="0,-137,-48,0">
+            <Grid x:Name="LayoutRoot" Background="White" Height="770" Width="480" Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <local:SliderControl x:Name="RadiusSliderControl" UnitOfMeasure="m" Grid.ColumnSpan="3" MinimumValue="50" MaximumValue="500" Value="100" />
+                <TextBlock Text="Talking in" Grid.Row="1" Grid.ColumnSpan="3" Foreground="#FF5D5D5D" HorizontalAlignment="Center" FontSize="13"/>
+                <TextBlock x:Name="localRoom" Grid.ColumnSpan="3" Text="Turku, Finland" Grid.Row="2" Foreground="#FF5D5D5D" HorizontalAlignment="Center" Tap="localRoom_Tap" />
+                <StackPanel x:Name="roomList" Grid.Row="3" Grid.ColumnSpan="3" Tap="roomList_Tap" Visibility="Collapsed">
+                    <StackPanel.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFD4D6E4" Offset="1"/>
+                            <GradientStop Color="White"/>
+                        </LinearGradientBrush>
+                    </StackPanel.Background>
+                    <TextBlock Text="Go local" Foreground="#FF5D5D5D" Height="38" Margin="10,0,0,0"/>
+                    <TextBlock Text="Available rooms:" Foreground="#FF5D5D5D" Margin="10,0,0,0"/>
+                    <TextBlock Text="MercaTalks" Foreground="#FF5D5D5D" Margin="189,0,0,0" Height="33"/>
+                    <TextBlock Text="Monttu" Foreground="#FF5D5D5D" Margin="189,0,0,0" Height="33"/>
+                    <TextBlock Text="Assari" Foreground="#FF5D5D5D" Margin="189,0,0,0" Height="33"/>
+                    <TextBlock Text="Privaatti" Foreground="#FF5D5D5D" Margin="189,0,0,0" Height="33"/>
+                </StackPanel>
+                <Image x:Name="refreshIcon" Source="/Assets/Very-Basic-Refresh-icon.png" Width="30" Grid.Column="2" Margin="71,19,49,118" Grid.Row="3" Opacity="0.7" Visibility="Collapsed"/>
+                <Image x:Name="lockIcon" Source="/Assets/padlock-closed.png" Width="20" Grid.Column="1" Margin="121,170,19,22" Grid.Row="3" Grid.RowSpan="2" Visibility="Collapsed"/>
+                <feed:PendingMessagesControl x:Name="PendingMessages" Grid.ColumnSpan="3" Grid.Row="4"/>
+                <local:FeedControl x:Name="LocalFeed" Grid.ColumnSpan="3" Grid.Row="5"/>
+                <feed:FeedToolbar x:Name="Toolbar" Grid.ColumnSpan="3" Grid.Row="6"/>
+                <!-- Status overlay is last, so that it would appear above other controls on the screen. -->
+                <common:StatusOverlayControl x:Name="StatusOverlay" Visibility="Collapsed" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="3" Tap="StatusOverlay_Tap" />
+            </Grid>
+        </phone:PivotItem>
+        <phone:PivotItem CacheMode="{x:Null}" Header="Settings" Margin="0,-137,-48,0">
+            <StackPanel x:Name="settingsList">
+                <StackPanel.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFD4D6E4" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </StackPanel.Background>
+                <TextBlock Text="SKENE" FontSize="60" Foreground="#FF5D5D5D" Margin="10,10,0,0" Height="70"/>
+                <TextBlock Text="v0.8.2 BETA" FontSize="15" Foreground="#FF5D5D5D" Height="70" Margin="15,0,0,0"/>
+                <TextBlock Text="Display name:      Gringo65" FontSize="25" Foreground="#FF5D5D5D" Height="100" Margin="10,0,0,0"/>
+                <TextBlock Text="My tags" FontSize="40" Foreground="#FF5D5D5D" Margin="10,0,0,0" Height="50"/>
+                <TextBlock Text="Show conversations that I'm following" FontSize="15" Foreground="#FF5D5D5D" Margin="30,0,0,0" Height="40"/>
+                <TextBlock Text="Search" FontSize="40" Foreground="#FF5D5D5D" Margin="10,0,0,0" Height="50"/>
+                <TextBlock Text="Find posts that interest you" FontSize="15" Foreground="#FF5D5D5D" Margin="30,0,0,0" Height="40"/>
+                <TextBlock Text="Options" FontSize="40" Foreground="#FF5D5D5D" Margin="10,0,0,0" Height="50"/>
+                <TextBlock Text="Set filters, customize your Skene experience" FontSize="15" Foreground="#FF5D5D5D" Margin="30,0,0,0" Height="40"/>
+                <TextBlock Text="My account" FontSize="40" Foreground="#FF5D5D5D" Margin="10,0,0,0" Height="50"/>
+                <TextBlock Text="Upgrade to a premium account" FontSize="15" Foreground="#FF5D5D5D" Margin="30,0,0,0" Height="100"/>
+                <TextBlock Text="Quote of the day:" FontSize="20" Foreground="#FF5D5D5D" HorizontalAlignment="Center" Height="30"/>
+                <TextBlock Text="&quot;I use Skene every day&quot;" FontSize="15" Foreground="#FF5D5D5D" HorizontalAlignment="Center" Height="20"/>
+                <TextBlock Text="- Larry Page" FontSize="15" Foreground="#FF5D5D5D" Margin="250,0,0,0" Height="40"/>
+            </StackPanel>
+        </phone:PivotItem>
+    </phone:Pivot>
 </UserControl>
