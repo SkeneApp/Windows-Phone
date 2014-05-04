@@ -28,7 +28,7 @@
                 <TranslateTransform x:Name="LayoutTransform" />
             </Grid.RenderTransform>
             <Grid.RowDefinitions>
-                <RowDefinition Height="45"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="80"/>
                 <RowDefinition/>
@@ -44,17 +44,17 @@
                  drag the grip, it would actually scroll the FeedControl scrollViewer underneath
                  it. The only solution to this is to place this little scrollviewer here,
                  and catch the dragging manipulation events throug it. -->
-            <ScrollViewer x:Name="Grip" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Disabled" ManipulationDelta="Grip_ManipulationDelta" ManipulationCompleted="Grip_ManipulationCompleted" MouseLeftButtonDown="Grip_MouseLeftButtonDown" Background="#FFD6D4E4">
+            <ScrollViewer x:Name="Grip" Grid.Row="0" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Disabled" ManipulationDelta="Grip_ManipulationDelta" ManipulationCompleted="Grip_ManipulationCompleted" MouseLeftButtonDown="Grip_MouseLeftButtonDown" Background="#FFD6D4E4">
                 <local:SliderGrip/>
             </ScrollViewer>
             <Border BorderBrush="#FF5D5D5D" BorderThickness="0,.5,0,0" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
             <local:WhisprMap x:Name="Map" Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
             
-            <Image Source="/Assets/flame-512.png" Grid.Row="1" Grid.Column="0" Width="40" Margin="0,0,180,0" VerticalAlignment="Bottom"/>
+            <!--Image Source="/Assets/flame-512.png" Grid.Row="1" Grid.Column="0" Width="40" Margin="0,0,180,0" VerticalAlignment="Bottom"/>
             <TextBlock Grid.Row="1" Grid.Column="0" Text="Hottest" Foreground="#FF5D5D5D" VerticalAlignment="Bottom" Margin="50,0,0,0" />
             <Image Source="/Assets/chat-add-alt-480.png" Grid.Row="2" Grid.Column="0" Width="40" Margin="0,0,180,0" VerticalAlignment="Bottom"/>
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="Newest" Foreground="#FF5D5D5D" VerticalAlignment="Bottom" Margin="50,0,0,0" />
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Newest" Foreground="#FF5D5D5D" VerticalAlignment="Bottom" Margin="50,0,0,0" /-->
         </Grid>
-        <local:MapToolbar x:Name="Toolbar" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0,0,0"/>
+        <local:MapToolbar x:Name="Toolbar" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Grid.Row="2" Margin="0,0,0,0"/>
     </Grid>
 </UserControl>

@@ -10,7 +10,7 @@
     d:DesignHeight="50" d:DesignWidth="480">
 
     <Grid x:Name="LayoutRoot" Background="#FFD6D4E4">
-        <Border BorderThickness="1,1,1,0" CornerRadius="5" BorderBrush="#FF5D5D5D" Background="#FFD6D4E4" />
+        <Border BorderThickness="1,1,1,1" CornerRadius="5" BorderBrush="#FF5D5D5D" Background="#FFD6D4E4" />
         <Border BorderThickness="0,0,0,0" Margin="0, 5, 0, 0" BorderBrush="#FF5D5D5D" >
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

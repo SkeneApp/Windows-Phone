@@ -211,6 +211,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\arrowup_simple.png" />
+    <Content Include="Assets\arrow_simple.png" />
     <Content Include="Assets\back-icon.png" />
     <Content Include="Assets\Button_20-128.png" />
     <Content Include="Assets\chat-add-alt-480.png" />
@@ -222,6 +224,7 @@
     <Content Include="Assets\message_bg.jpg" />
     <Content Include="Assets\message_bg.png" />
     <Content Include="Assets\message_options.jpg" />
+    <Content Include="Assets\mylocation_simple.png" />
     <Content Include="Assets\padlock-closed.png" />
     <Content Include="Assets\tile_image_medium_336x336.png" />
     <Content Include="Assets\tile_image_small_159x159.png" />

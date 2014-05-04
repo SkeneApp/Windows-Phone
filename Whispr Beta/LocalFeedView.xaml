@@ -30,7 +30,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <local:SliderControl x:Name="RadiusSliderControl" UnitOfMeasure="m" Grid.ColumnSpan="3" MinimumValue="50" MaximumValue="500" Value="100" />
+                <local:SliderControl x:Name="RadiusSliderControl" UnitOfMeasure="m" Grid.Column="0" Grid.ColumnSpan="3" MinimumValue="50" MaximumValue="500" Value="100" />
                 <TextBlock Text="Talking in" Grid.Row="1" Grid.ColumnSpan="3" Foreground="#FF5D5D5D" HorizontalAlignment="Center" FontSize="13"/>
                 <TextBlock x:Name="localRoom" Grid.ColumnSpan="3" Text="Turku, Finland" Grid.Row="2" Foreground="#FF5D5D5D" HorizontalAlignment="Center" Tap="localRoom_Tap" />
                 <StackPanel x:Name="roomList" Grid.Row="3" Grid.ColumnSpan="3" Tap="roomList_Tap" Visibility="Collapsed">
@@ -67,13 +67,13 @@
                 <TextBlock Text="SKENE" FontSize="60" Foreground="#FF5D5D5D" Margin="10,10,0,0" Height="70"/>
                 <TextBlock Text="v0.8.2 BETA" FontSize="15" Foreground="#FF5D5D5D" Height="70" Margin="15,0,0,0"/>
                 <TextBlock Text="Display name:      Gringo65" FontSize="25" Foreground="#FF5D5D5D" Height="100" Margin="10,0,0,0"/>
-                <TextBlock Text="My tags" FontSize="40" Foreground="#FF5D5D5D" Margin="10,0,0,0" Height="50"/>
+                <TextBlock Text="My tags" FontSize="40" Foreground="#FF5D5D5D" Margin="10,0,0,0" Height="55"/>
                 <TextBlock Text="Show conversations that I'm following" FontSize="15" Foreground="#FF5D5D5D" Margin="30,0,0,0" Height="40"/>
-                <TextBlock Text="Search" FontSize="40" Foreground="#FF5D5D5D" Margin="10,0,0,0" Height="50"/>
+                <TextBlock Text="Search" FontSize="40" Foreground="#FF5D5D5D" Margin="10,0,0,0" Height="55"/>
                 <TextBlock Text="Find posts that interest you" FontSize="15" Foreground="#FF5D5D5D" Margin="30,0,0,0" Height="40"/>
-                <TextBlock Text="Options" FontSize="40" Foreground="#FF5D5D5D" Margin="10,0,0,0" Height="50"/>
+                <TextBlock Text="Options" FontSize="40" Foreground="#FF5D5D5D" Margin="10,0,0,0" Height="55"/>
                 <TextBlock Text="Set filters, customize your Skene experience" FontSize="15" Foreground="#FF5D5D5D" Margin="30,0,0,0" Height="40"/>
-                <TextBlock Text="My account" FontSize="40" Foreground="#FF5D5D5D" Margin="10,0,0,0" Height="50"/>
+                <TextBlock Text="My account" FontSize="40" Foreground="#FF5D5D5D" Margin="10,0,0,0" Height="55"/>
                 <TextBlock Text="Upgrade to a premium account" FontSize="15" Foreground="#FF5D5D5D" Margin="30,0,0,0" Height="100"/>
                 <TextBlock Text="Quote of the day:" FontSize="20" Foreground="#FF5D5D5D" HorizontalAlignment="Center" Height="30"/>
                 <TextBlock Text="&quot;I use Skene every day&quot;" FontSize="15" Foreground="#FF5D5D5D" HorizontalAlignment="Center" Height="20"/>

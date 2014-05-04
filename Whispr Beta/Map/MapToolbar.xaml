@@ -7,23 +7,39 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="480" d:DesignWidth="480">
+    d:DesignHeight="70" d:DesignWidth="480">
 
     <Grid x:Name="LayoutRoot">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Border Grid.ColumnSpan="2" Background="Transparent" BorderBrush="Transparent" BorderThickness="0,1,0,0" CornerRadius="5" />
+        <Border Grid.ColumnSpan="3" BorderBrush="Transparent" BorderThickness="0,1,0,0" CornerRadius="0" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFD4D6E4" Offset="1"/>
+                    <GradientStop Color="White"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
         <Rectangle Grid.ColumnSpan="2" Fill="Transparent" Margin="0,5,0,0"/>
-        <Button Height="75" FontWeight="Medium" BorderBrush="Transparent" Foreground="#FF5D5D5D" Width="100" HorizontalAlignment="Left" Margin="-5, 0, -10, 0" Grid.Column="0" x:Name="buttonBack" Click="buttonBack_Click" BorderThickness="1" Template="{StaticResource RoundedButtonTemplate}">
+        <Button FontWeight="Medium" BorderBrush="Transparent" Foreground="#FF5D5D5D" Height="70" Width="80" HorizontalAlignment="Center" Grid.Column="0" x:Name="buttonBack" Click="buttonBack_Click" BorderThickness="1" Template="{StaticResource RoundedButtonTemplate}">
             <Button.Background>
-                <ImageBrush Stretch="Fill" ImageSource="/Assets/back-icon.png"/>
+                <ImageBrush Stretch="Fill" ImageSource="/Assets/arrow_simple.png"/>
             </Button.Background>
         </Button>
-        <Button  BorderBrush="Transparent" Foreground="#FF5D5D5D" Width="100" Height="75" HorizontalAlignment="Right" Margin="0, 0, 0, 0" Grid.Column="1" x:Name="buttonMyLocation" Click="buttonMyLocation_Click" BorderThickness="1" Template="{StaticResource RoundedButtonTemplate}">
+        <Button FontWeight="Medium" BorderBrush="Transparent" Foreground="#FF5D5D5D" Height="75" Width="85" HorizontalAlignment="Center" Grid.Column="1" x:Name="buttonSettings" Click="buttonBack_Click" BorderThickness="1" Template="{StaticResource RoundedButtonTemplate}" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="90"/>
+            </Button.RenderTransform>
             <Button.Background>
-                <ImageBrush Stretch="Fill" ImageSource="/Assets/location-me.png"/>
+                <ImageBrush Stretch="Fill" ImageSource="/Assets/arrow_simple.png"/>
+            </Button.Background>
+        </Button>
+        <Button  BorderBrush="Transparent" Foreground="#FF5D5D5D" Height="75" Width="75" HorizontalAlignment="Center" Grid.Column="2" x:Name="buttonMyLocation" Click="buttonMyLocation_Click" BorderThickness="1" Template="{StaticResource RoundedButtonTemplate}">
+            <Button.Background>
+                <ImageBrush Stretch="Fill" ImageSource="/Assets/mylocation_simple.png"/>
             </Button.Background>
         </Button>
     </Grid>

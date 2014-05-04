@@ -6,14 +6,14 @@ namespace WhisprBeta.Common
     public partial class MessageControl
     {
       /*  private readonly Color normalTextColor = Colors.White;
-        private readonly Color normalDateColor = Color.FromArgb(255, 93, 93, 93);
-        private readonly Color normalBackgroundColor = Color.FromArgb(255, 21, 21, 21);
-        private readonly Color normalBorderColor = Color.FromArgb(255, 100, 100, 100);
+        private readonly Color normalDateColor = Color.FromArgb(255, 93, 93, 93); */
+        private readonly Color normalBackgroundColor = Color.FromArgb(255, 240, 248, 255);
+      /*  private readonly Color normalBorderColor = Color.FromArgb(255, 100, 100, 100);
 
         private readonly Color immediateTextColor = Colors.White;
-        private readonly Color immediateDateColor = Color.FromArgb(255, 93, 93, 93);
-        private readonly Color immediateBackgroundColor = Color.FromArgb(255, 21, 21, 21);
-        private readonly Color immediateBorderColor = Color.FromArgb(255, 100, 100, 100);
+        private readonly Color immediateDateColor = Color.FromArgb(255, 93, 93, 93); */
+        private readonly Color immediateBackgroundColor = Color.FromArgb(255, 255, 255, 255);
+      /*  private readonly Color immediateBorderColor = Color.FromArgb(255, 100, 100, 100);
 
         private readonly Color outdatedTextColor = Colors.Gray;
         private readonly Color outdatedDateColor = Color.FromArgb(255, 93, 93, 93);
@@ -169,6 +169,8 @@ namespace WhisprBeta.Common
             textBlockOptions.Visibility = System.Windows.Visibility.Visible;
             borderBottom2.Visibility = System.Windows.Visibility.Visible;
             textBlockDate.Opacity = 0;
+            borderBottom.Background = new SolidColorBrush(normalBackgroundColor);
+
         }
         
         private void textBlockMessage_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -183,6 +185,7 @@ namespace WhisprBeta.Common
             textBlockOptions.Visibility = System.Windows.Visibility.Collapsed;
             borderBottom2.Visibility = System.Windows.Visibility.Collapsed;
             textBlockDate.Opacity = 100;
+            borderBottom.Background = new SolidColorBrush(immediateBackgroundColor);
         }
 
         private void borderBottom_Hold(object sender, System.Windows.Input.GestureEventArgs e)
