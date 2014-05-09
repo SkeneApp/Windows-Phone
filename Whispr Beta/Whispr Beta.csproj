@@ -212,6 +212,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\arrowup_simple.png" />
+    <Content Include="Assets\arrow_reply.png" />
     <Content Include="Assets\arrow_simple.png" />
     <Content Include="Assets\back-icon.png" />
     <Content Include="Assets\Button_20-128.png" />

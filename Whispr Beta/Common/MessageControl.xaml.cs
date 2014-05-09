@@ -44,7 +44,7 @@ namespace WhisprBeta.Common
             set
             {
                 textBlockMessage.Text = value;
-                textBlockMessage.FontSize = 17;
+                textBlockMessage.FontSize = 19;
                 Show();
             }
         }
@@ -60,7 +60,7 @@ namespace WhisprBeta.Common
                 if (publishDate != value) {
                     publishDate = value;
                     textBlockDate.Text = Utils.ToTimeSinceString(value);
-                    textBlockDate.FontSize = 13;
+                    textBlockDate.FontSize = 14;
                     unixTimeStamp = Utils.DateTimeToUnixTimestamp(value);
                     Show();
                 }
@@ -92,13 +92,13 @@ namespace WhisprBeta.Common
                 if (value) {
                     textBlockMessage.Foreground = new SolidColorBrush(immediateTextColor);
                     textBlockDate.Foreground = new SolidColorBrush(immediateDateColor);
-                   // borderBottom.Background = new SolidColorBrush(immediateBackgroundColor);
+                    borderBottom.Background = new SolidColorBrush(normalBackgroundColor);
                    // borderBottom.BorderBrush = new SolidColorBrush(immediateBorderColor);
                     textBlockDate.Text = "Right now";
                 } else {
                     textBlockMessage.Foreground = new SolidColorBrush(normalTextColor);
                     textBlockDate.Foreground = new SolidColorBrush(normalDateColor);
-                   // borderBottom.Background = new SolidColorBrush(normalBackgroundColor);
+                    borderBottom.Background = new SolidColorBrush(immediateBackgroundColor);
                    // borderBottom.BorderBrush = new SolidColorBrush(normalBorderColor);
                 }
             }
@@ -208,6 +208,22 @@ namespace WhisprBeta.Common
             reportHandle.Visibility = System.Windows.Visibility.Collapsed;
             reportMessage.Visibility = System.Windows.Visibility.Collapsed;
             reportDate.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        private void borderBottom_DoubleTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            borderBottom1.Visibility = System.Windows.Visibility.Visible;
+            borderBottom3.Visibility = System.Windows.Visibility.Visible;
+            borderBottom2.Visibility = System.Windows.Visibility.Collapsed;
+            borderBottom.Background = new SolidColorBrush(immediateBackgroundColor);
+            textBlockDate.Opacity = 100;
+
+        }
+
+        private void borderBottom1_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            borderBottom1.Visibility = System.Windows.Visibility.Collapsed;
+            borderBottom3.Visibility = System.Windows.Visibility.Collapsed;
         }
 
     }

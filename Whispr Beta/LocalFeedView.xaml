@@ -14,7 +14,7 @@
     d:DesignHeight="800" d:DesignWidth="480" Loaded="UserControl_Loaded">
 
     <phone:Pivot HorizontalAlignment="Left" Height="800" Title="SKENE" VerticalAlignment="Top" Width="480" Foreground="White" Background="White">
-        <phone:PivotItem CacheMode="{x:Null}" Header="Feed" Margin="0,-137,-48,0">
+        <phone:PivotItem CacheMode="{x:Null}" Header="Feed" Margin="0,-147,-48,0">
             <Grid x:Name="LayoutRoot" Background="White" Height="770" Width="480" Margin="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
@@ -36,8 +36,8 @@
                 <StackPanel x:Name="roomList" Grid.Row="3" Grid.ColumnSpan="3" Tap="roomList_Tap" Visibility="Collapsed">
                     <StackPanel.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FFD4D6E4" Offset="1"/>
-                            <GradientStop Color="White"/>
+                            <GradientStop Color="White" Offset="0"/>
+                            <GradientStop Color="#FFD6D4E4" Offset="1"/>
                         </LinearGradientBrush>
                     </StackPanel.Background>
                     <TextBlock Text="Go local" Foreground="#FF5D5D5D" Height="38" Margin="10,0,0,0"/>
@@ -68,7 +68,7 @@
                 <TextBlock Text="v0.8.2 BETA" FontSize="15" Foreground="#FF5D5D5D" Height="70" Margin="15,0,0,0"/>
                 <TextBlock Text="Display name:      Gringo65" FontSize="25" Foreground="#FF5D5D5D" Height="100" Margin="10,0,0,0"/>
                 <TextBlock Text="My tags" FontSize="40" Foreground="#FF5D5D5D" Margin="10,0,0,0" Height="55"/>
-                <TextBlock Text="Show conversations that I'm following" FontSize="15" Foreground="#FF5D5D5D" Margin="30,0,0,0" Height="40"/>
+                <TextBlock Text="Conversations you're currently following" FontSize="15" Foreground="#FF5D5D5D" Margin="30,0,0,0" Height="40"/>
                 <TextBlock Text="Search" FontSize="40" Foreground="#FF5D5D5D" Margin="10,0,0,0" Height="55"/>
                 <TextBlock Text="Find posts that interest you" FontSize="15" Foreground="#FF5D5D5D" Margin="30,0,0,0" Height="40"/>
                 <TextBlock Text="Options" FontSize="40" Foreground="#FF5D5D5D" Margin="10,0,0,0" Height="55"/>

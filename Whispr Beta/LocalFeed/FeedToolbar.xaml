@@ -24,17 +24,15 @@
         <Border Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" BorderThickness="0,1,0,0" BorderBrush="#FFD6D4E4" CornerRadius="0">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFD6D4E4" Offset="1"/>
-                    <GradientStop Color="White"/>
-                    <GradientStop Color="#FFD6D4E4" Offset="1"/>
+                    <GradientStop Color="White" Offset="0"/>
                     <GradientStop Color="#FFD6D4E4" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
         <!-- Publish delay slier and slider text -->
         <!--whisprBeta:SliderControl x:Name="DelaySliderControl" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" UnitOfMeasure="min" MinimumValue="0" MaximumValue="5" Value="0" Visibility="Collapsed" /-->
-            <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" x:Name="delayTimer" Text="Publish: Instant" Foreground="#FF5D5D5D" Margin="20,5,19,0" FontSize="20" Visibility="Collapsed"/>
-            <CheckBox VerticalAlignment="Center" x:Name="handleCHeck" Content="Attach name" Foreground="#FF5D5D5D" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="#7F5D5D5D" FontSize="20" HorizontalAlignment="Right" Visibility="Collapsed"/>
+        <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" x:Name="delayTimer" Text="Publish: Instant" Foreground="#FF5D5D5D" Margin="20,5,19,0" FontSize="20" Visibility="Collapsed"/>
+        <CheckBox VerticalAlignment="Center" x:Name="handleCHeck" Content="Attach name" Foreground="#FF5D5D5D" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="#7F5D5D5D" FontSize="20" HorizontalAlignment="Right" Visibility="Collapsed"/>
         <!-- "Map" button and input text box -->
         <Button Height="75" Grid.Row="1" x:Name="buttonMap" Margin="-5, -15, -10, 0" Click="buttonMap_Click" Width="Auto" VerticalAlignment="Bottom" BorderThickness="0" Template="{StaticResource RoundedButtonTemplate}">
             <Button.Background>
