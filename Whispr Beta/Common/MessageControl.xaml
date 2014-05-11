@@ -17,37 +17,48 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="45" />
+            <ColumnDefinition Width="35" />
+            <ColumnDefinition Width="35" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Border Grid.Row="0" Grid.ColumnSpan="2" x:Name="borderBottom" BorderBrush="Black" Margin="15,2,10,0" BorderThickness="0,.5,0,0" CornerRadius="0" VerticalAlignment="Center" MinWidth="200" Tap="borderBottom_Tap" Hold="borderBottom_Hold" DoubleTap="borderBottom_DoubleTap" >
+        <Border Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" x:Name="borderBottom" BorderBrush="#FF5D5D5D" Margin="5,2,15,0" BorderThickness="0,.5,0,0" CornerRadius="0" VerticalAlignment="Center" MinWidth="200" Tap="borderBottom_Tap" Hold="borderBottom_Hold" DoubleTap="borderBottom_DoubleTap" >
             <StackPanel Margin="0">
-                <TextBlock x:Name="textBlockHandle" TextWrapping="Wrap" Margin="361,0,0,0" Text="Gringo65" Foreground="#FF5D5D5D" FontSize="14" HorizontalAlignment="Right"/>
-                <TextBlock x:Name="textBlockMessage" TextWrapping="Wrap" Text="Your text here" Foreground="#FF5D5D5D" FontSize="28" VerticalAlignment="Center" Tap="textBlockMessage_Tap" Margin="0,0,37,0" />
-                <TextBlock x:Name="textBlockDate" TextWrapping="Wrap" Text="Just now" HorizontalAlignment="Left" Foreground="#FF5D5D5D" FontWeight="Light" FontSize="14" Margin="0,10,0,0"/>
+                <TextBlock x:Name="textBlockHandle" TextWrapping="Wrap" HorizontalAlignment="Right" Text="3 (1 new) |  27" Foreground="#FF5D5D5D" FontSize="14" FontWeight="Light"/>
+                <TextBlock x:Name="textBlockMessage" TextWrapping="Wrap" Text="Your text here" Foreground="#FF5D5D5D" FontSize="28" VerticalAlignment="Center" Tap="textBlockMessage_Tap" Margin="0,0,35,0" />
+                <TextBlock x:Name="textBlockDate" TextWrapping="Wrap" Text="Just now       /Gringo65" HorizontalAlignment="Left" Foreground="#FF5D5D5D" FontWeight="Light" FontSize="14" Margin="0,0,0,0" Padding="0,3,0,0"/>
             </StackPanel>
         </Border>
-        <Border Grid.Row="1" Grid.ColumnSpan="2" x:Name="borderMiddle" BorderBrush="Black" Margin="15,2,10,0" BorderThickness="0,.5,0,0" CornerRadius="0" VerticalAlignment="Center" MinWidth="200" Tap="borderMiddle_Tap" Visibility="Collapsed">
-            <StackPanel Margin="0">
-                <TextBlock x:Name="reportHandle" TextWrapping="Wrap" Margin="361,0,0,0" Text="Gringo65" Foreground="#FF5D5D5D" FontSize="14" HorizontalAlignment="Right"/>
-                <TextBlock x:Name="reportMessage" TextWrapping="Wrap" FontSize="20" HorizontalAlignment="Center" Text="Tap to report this message" Foreground="#FF5D5D5D" Margin="0,0,37,0"/>
-                <TextBlock x:Name="reportDate" TextWrapping="Wrap" Text="Just now" HorizontalAlignment="Right" Foreground="#FF5D5D5D" FontWeight="Light" FontSize="14"/>
-            </StackPanel>
+        <Border Grid.Row="0" Grid.Column="0" BorderBrush="#FFBCBFD3">
+            <Image x:Name="messageCollapsed" Source="/Assets/arrow_simple.png" Width="30" Margin="0,0,15,0" Height="20" Opacity="0.6" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <CompositeTransform ScaleX="-1"/>
+                </Image.RenderTransform>
+            </Image>
         </Border>
-        <Border Grid.Row="2" Grid.ColumnSpan="2" x:Name="borderBottom2" Margin="15,-5,10,0" Background="AliceBlue" BorderBrush="#FFBCBFD3" BorderThickness="0,0,0,.5" Padding="30,3,14,6" CornerRadius="0" VerticalAlignment="Center" MinWidth="200" Tap="borderBottom2_Tap" Visibility="Collapsed">
-            <StackPanel Margin="0" >
-                <TextBlock x:Name="textBlockOptions" TextWrapping="Wrap" Text="Comment      |     See location      |      Favorite      |     Tag" Margin="2,2,2,3" Foreground="#FF5D5D5D" FontSize="15" VerticalAlignment="Top" />
-            </StackPanel>
+        <Border Grid.Row="0" Grid.Column="0" BorderBrush="#FFBCBFD3">
+            <Image x:Name="messageExpanded" Source="/Assets/arrowup_simple.png" Width="25" Margin="7,0,0,0" Height="25" Opacity="0.6" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed">
+                <Image.RenderTransform>
+                    <CompositeTransform ScaleY="-1"/>
+                </Image.RenderTransform>
+            </Image>
         </Border>
-        <Border Grid.Row="3" Grid.Column="1" x:Name="borderBottom1" Margin="0,0,10,0" Padding="0,3,14,6" CornerRadius="0" VerticalAlignment="Center" MinWidth="200" Tap="borderBottom1_Tap" Visibility="Collapsed">
+        <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" x:Name="borderMiddle" BorderBrush="#FF5D5D5D" Margin="15,0,15,0" BorderThickness="0,.5,0,0" CornerRadius="0" VerticalAlignment="Center" MinHeight="80" MinWidth="200" Tap="borderMiddle_Tap" Visibility="Collapsed">
+            <!--TextBlock x:Name="reportHandle" TextWrapping="Wrap" Margin="361,0,0,0" Text="Gringo65" Foreground="#FF5D5D5D" FontSize="14" HorizontalAlignment="Right"/-->
+            <TextBlock x:Name="reportMessage" TextWrapping="Wrap" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Tap to report this message" Foreground="#FF5D5D5D"/>
+            <!--TextBlock x:Name="reportDate" TextWrapping="Wrap" Text="Just now" HorizontalAlignment="Right" Foreground="#FF5D5D5D" FontWeight="Light" FontSize="14"/-->
+        </Border>
+        <Border Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" x:Name="borderBottom1" Margin="0,0,10,0" Padding="0,3,14,6" CornerRadius="0" VerticalAlignment="Center" MinWidth="200" Tap="borderBottom1_Tap" Visibility="Collapsed">
             <StackPanel Margin="0,0,-14,0">
-                <TextBlock x:Name="textBlockHandle1" TextWrapping="Wrap" Text="Joujouman" Foreground="#FF5D5D5D" FontSize="14" HorizontalAlignment="Right"/>
-                <TextBlock x:Name="textBlockMessage1" TextWrapping="Wrap" Text="This is a comment to the above post, indented and showing only up to two rows of text..." Foreground="#FF5D5D5D" FontSize="17" VerticalAlignment="Center" Margin="2,0,55,0"/>
-                <TextBlock x:Name="textBlockDate1" TextWrapping="Wrap" Text="Just now" HorizontalAlignment="Left" Foreground="#FF5D5D5D" FontWeight="Light" FontSize="14"/>
+                <!--TextBlock x:Name="textBlockHandle1" TextWrapping="Wrap" Text="Joujouman" Foreground="#FF5D5D5D" FontSize="14" HorizontalAlignment="Right"/-->
+                <TextBlock x:Name="textBlockMessage1" TextWrapping="Wrap" Text="This is a comment to the above post; up to three comments will be shown in the feed, after which the &quot;Add comment&quot; -button will be replaced by &quot;See full conversation&quot; that switches to the conversation view" Foreground="#FF5D5D5D" FontSize="17" VerticalAlignment="Center" Margin="2,0,55,0"/>
+                <TextBlock x:Name="textBlockDate1" TextWrapping="Wrap" Text="Just now       /Joujouman" HorizontalAlignment="Left" Foreground="#FF5D5D5D" FontWeight="Light" FontSize="14"/>
             </StackPanel>
         </Border>
-        <Border Grid.Row="3" Grid.Column="0" x:Name="borderBottom3" BorderBrush="#FFBCBFD3" BorderThickness="0" CornerRadius="0" VerticalAlignment="Center" Margin="15,0,0,20" Visibility="Collapsed">
-            <Image Source="/Assets/arrow_reply.png" Width="40" Margin="5,0,5,8" Height="30"/>
+        <Border Grid.Row="2" Grid.Column="1" x:Name="borderBottom3" BorderBrush="#FFBCBFD3" BorderThickness="0" CornerRadius="0" VerticalAlignment="Center" Margin="5,0,0,20" Visibility="Collapsed">
+            <Image Source="/Assets/arrow_reply.png" Width="40" Margin="0,0,5,8" Height="30"/>
+        </Border>
+        <Border Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" x:Name="borderBottom2" Margin="5,0,15,0" Background="White" BorderBrush="#FFBCBFD3" BorderThickness="0,0,0,0" Padding="0,3,14,0" CornerRadius="0" VerticalAlignment="Center" MinHeight="50" MinWidth="200" Tap="borderBottom2_Tap" Visibility="Collapsed">
+            <TextBlock x:Name="textBlockOptions" TextWrapping="Wrap" Text="Add comment        |       See location        |       Tag" Margin="2,2,2,3" Foreground="#FF5D5D5D" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Border>
     </Grid>
 </UserControl>

@@ -32,7 +32,7 @@
                 </Grid.ColumnDefinitions>
                 <local:SliderControl x:Name="RadiusSliderControl" UnitOfMeasure="m" Grid.Column="0" Grid.ColumnSpan="3" MinimumValue="50" MaximumValue="500" Value="100" />
                 <TextBlock Text="Talking in" Grid.Row="1" Grid.ColumnSpan="3" Foreground="#FF5D5D5D" HorizontalAlignment="Center" FontSize="13"/>
-                <TextBlock x:Name="localRoom" Grid.ColumnSpan="3" Text="Turku, Finland" Grid.Row="2" Foreground="#FF5D5D5D" HorizontalAlignment="Center" Tap="localRoom_Tap" />
+                <TextBlock x:Name="localRoom" Grid.Column="0" Grid.ColumnSpan="3" Text="Turku, Finland" Grid.Row="2" Foreground="#FF5D5D5D" HorizontalAlignment="Center" Tap="localRoom_Tap" Margin="10,0,0,0"/>
                 <StackPanel x:Name="roomList" Grid.Row="3" Grid.ColumnSpan="3" Tap="roomList_Tap" Visibility="Collapsed">
                     <StackPanel.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

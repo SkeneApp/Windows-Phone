@@ -168,8 +168,12 @@ namespace WhisprBeta.Common
         {
             textBlockOptions.Visibility = System.Windows.Visibility.Visible;
             borderBottom2.Visibility = System.Windows.Visibility.Visible;
-            textBlockDate.Opacity = 0;
-            borderBottom.Background = new SolidColorBrush(normalBackgroundColor);
+            borderBottom1.Visibility = System.Windows.Visibility.Visible;
+            borderBottom3.Visibility = System.Windows.Visibility.Visible;
+            messageCollapsed.Visibility = System.Windows.Visibility.Collapsed;
+            messageExpanded.Visibility = System.Windows.Visibility.Visible;
+            //textBlockDate.Opacity = 0;
+            //borderBottom.Background = new SolidColorBrush(normalBackgroundColor);
 
         }
         
@@ -178,14 +182,20 @@ namespace WhisprBeta.Common
 
             textBlockOptions.Visibility = System.Windows.Visibility.Visible;
             borderBottom2.Visibility = System.Windows.Visibility.Visible;
+            messageCollapsed.Visibility = System.Windows.Visibility.Collapsed;
+            messageExpanded.Visibility = System.Windows.Visibility.Visible;
         }
 
         private void borderBottom2_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             textBlockOptions.Visibility = System.Windows.Visibility.Collapsed;
             borderBottom2.Visibility = System.Windows.Visibility.Collapsed;
-            textBlockDate.Opacity = 100;
-            borderBottom.Background = new SolidColorBrush(immediateBackgroundColor);
+            borderBottom1.Visibility = System.Windows.Visibility.Collapsed;
+            borderBottom3.Visibility = System.Windows.Visibility.Collapsed;
+            messageCollapsed.Visibility = System.Windows.Visibility.Visible;
+            messageExpanded.Visibility = System.Windows.Visibility.Collapsed;
+            //textBlockDate.Opacity = 100;
+            //borderBottom.Background = new SolidColorBrush(immediateBackgroundColor);
         }
 
         private void borderBottom_Hold(object sender, System.Windows.Input.GestureEventArgs e)
@@ -197,17 +207,17 @@ namespace WhisprBeta.Common
             borderBottom2.Visibility = System.Windows.Visibility.Collapsed;
 
             borderMiddle.Visibility = System.Windows.Visibility.Visible;
-            reportHandle.Visibility = System.Windows.Visibility.Visible;
+            //.Visibility = System.Windows.Visibility.Visible;
             reportMessage.Visibility = System.Windows.Visibility.Visible;
-            reportDate.Visibility = System.Windows.Visibility.Visible;
+            //reportDate.Visibility = System.Windows.Visibility.Visible;
         }
 
         private void borderMiddle_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             borderMiddle.Visibility = System.Windows.Visibility.Collapsed;
-            reportHandle.Visibility = System.Windows.Visibility.Collapsed;
+            //reportHandle.Visibility = System.Windows.Visibility.Collapsed;
             reportMessage.Visibility = System.Windows.Visibility.Collapsed;
-            reportDate.Visibility = System.Windows.Visibility.Collapsed;
+            //reportDate.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         private void borderBottom_DoubleTap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -215,7 +225,7 @@ namespace WhisprBeta.Common
             borderBottom1.Visibility = System.Windows.Visibility.Visible;
             borderBottom3.Visibility = System.Windows.Visibility.Visible;
             borderBottom2.Visibility = System.Windows.Visibility.Collapsed;
-            borderBottom.Background = new SolidColorBrush(immediateBackgroundColor);
+            //borderBottom.Background = new SolidColorBrush(immediateBackgroundColor);
             textBlockDate.Opacity = 100;
 
         }
@@ -224,6 +234,10 @@ namespace WhisprBeta.Common
         {
             borderBottom1.Visibility = System.Windows.Visibility.Collapsed;
             borderBottom3.Visibility = System.Windows.Visibility.Collapsed;
+            textBlockOptions.Visibility = System.Windows.Visibility.Collapsed;
+            borderBottom2.Visibility = System.Windows.Visibility.Collapsed;
+            messageCollapsed.Visibility = System.Windows.Visibility.Visible;
+            messageExpanded.Visibility = System.Windows.Visibility.Collapsed;
         }
 
     }
