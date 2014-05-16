@@ -7,7 +7,6 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using Microsoft.Phone.Maps.Controls;
 using WhisprBeta.Common;
-using WhisprBeta.Map;
 using WhisprBeta.Services;
 
 namespace WhisprBeta

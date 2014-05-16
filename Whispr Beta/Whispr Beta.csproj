@@ -114,7 +114,6 @@
     <Compile Include="Map\MapToolbar.xaml.cs">
       <DependentUpon>MapToolbar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Map\MapViewState.cs" />
     <Compile Include="LocalFeed\PendingMessagesControl.xaml.cs">
       <DependentUpon>PendingMessagesControl.xaml</DependentUpon>
     </Compile>
