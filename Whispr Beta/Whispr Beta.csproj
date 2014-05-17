@@ -94,6 +94,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\IStatusService.cs" />
+    <Compile Include="Design\DesignLocationService.cs" />
+    <Compile Include="Design\DesignMessageService.cs" />
     <Compile Include="LoadingScreenView.xaml.cs">
       <DependentUpon>LoadingScreenView.xaml</DependentUpon>
     </Compile>
@@ -117,6 +119,9 @@
     </Compile>
     <Compile Include="LocalFeed\PendingMessagesControl.xaml.cs">
       <DependentUpon>PendingMessagesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MvvmTestView.xaml.cs">
+      <DependentUpon>MvvmTestView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\AppResources.Designer.cs">
@@ -147,6 +152,7 @@
       <DependentUpon>SliderGrip.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\WBoundingBox.cs" />
+    <Compile Include="ViewModel\LocalFeedViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -202,6 +208,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Map\SliderGrip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MvvmTestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
