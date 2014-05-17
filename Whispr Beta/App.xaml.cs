@@ -22,7 +22,7 @@ namespace WhisprBeta
 
         public static IMessageService MessageService { get; set; }
         public static ILocationService LocationService { get; set; }
-        public static Status Status { get; set; }
+        public static IStatusService StatusService { get; set; }
 
         private static bool NoPreviousUserLocation = true;
 
@@ -70,7 +70,7 @@ namespace WhisprBeta
             if (NoPreviousUserLocation)
             {
                 NoPreviousUserLocation = false;
-                Status.Set(Status.StatusType.LoadingWhisprs);
+                StatusService.Set(StatusType.LoadingWhisprs);
             }
         }
 
@@ -167,7 +167,7 @@ namespace WhisprBeta
             // Handle reset requests for clearing the backstack
             RootFrame.Navigated += CheckForResetNavigation;
 
-            Status = new Status();
+            StatusService = new StatusService();
             MessageService = new MessageService();
             LocationService = new LocationService();
 

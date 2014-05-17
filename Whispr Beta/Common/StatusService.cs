@@ -3,24 +3,16 @@
 namespace WhisprBeta.Common
 {
     public delegate void StatushangedEventHandler();
-    public class Status
+    public class StatusService : IStatusService
     {
         public event StatushangedEventHandler StatusChanged;
-        public enum StatusType
-        {
-            None,
-            NoInternet,
-            NoUserLocation,
-            LoadingWhisprs,
-            LocationDisabled
-        }
 
         public string CurrentStatus { get; set; }
         public bool StatusClear { get; set; }
 
         private static List<StatusType> _activeStatuses;
 
-        public Status()
+        public StatusService()
         {
             _activeStatuses = new List<StatusType>();
             CurrentStatus = string.Empty;

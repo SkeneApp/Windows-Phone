@@ -93,6 +93,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\IStatusService.cs" />
     <Compile Include="LoadingScreenView.xaml.cs">
       <DependentUpon>LoadingScreenView.xaml</DependentUpon>
     </Compile>
@@ -134,7 +135,7 @@
     <Compile Include="Common\SliderControl.xaml.cs">
       <DependentUpon>SliderControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Common\Status.cs" />
+    <Compile Include="Common\StatusService.cs" />
     <Compile Include="Common\StatusOverlayControl.xaml.cs">
       <DependentUpon>StatusOverlayControl.xaml</DependentUpon>
     </Compile>

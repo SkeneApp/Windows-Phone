@@ -15,6 +15,7 @@ namespace WhisprBeta
         public event MapButtonClickedEventHandler MapButtonClicked;
         private readonly IMessageService messageService;
         private readonly ILocationService locationService;
+        private readonly IStatusService statusService;
         private readonly DispatcherTimer messageUpdateTimer;
 
         public LocalFeedView()
@@ -26,6 +27,7 @@ namespace WhisprBeta
             }
             messageService = App.MessageService;
             locationService = App.LocationService;
+            statusService = App.StatusService;
             PendingMessages.Initialize();
             LocalFeed.Initialize();
             //TODO: Save UI values somewhere else // RadiusSliderControl.Value = locationService.FeedRadius;
@@ -128,10 +130,13 @@ namespace WhisprBeta
 
         private void Status_StatusChanged()
         {
-            if (App.Status.StatusClear) {
+            if (statusService.StatusClear)
+            {
                 StatusOverlay.Hide();
-            } else {
-                StatusOverlay.Show(App.Status.CurrentStatus);
+            }
+            else
+            {
+                StatusOverlay.Show(statusService.CurrentStatus);
             }
         }
 
@@ -148,14 +153,14 @@ namespace WhisprBeta
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            App.Status.StatusChanged += Status_StatusChanged;
-            if (App.Status.StatusClear)
+            statusService.StatusChanged += Status_StatusChanged;
+            if (statusService.StatusClear)
             {
                 StatusOverlay.Hide();
             }
             else
             {
-                StatusOverlay.Show(App.Status.CurrentStatus);
+                StatusOverlay.Show(statusService.CurrentStatus);
             }
             OnNavigatedTo();
         }

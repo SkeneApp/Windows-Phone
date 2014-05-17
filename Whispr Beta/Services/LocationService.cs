@@ -11,6 +11,8 @@ namespace WhisprBeta.Services
     {
         public event UserLocationChangedEventHandler UserLocationChanged;
         private Geolocator geolocator;
+        private readonly IStatusService statusService;
+
         private GeoCoordinate userLocation;
         public GeoCoordinate UserLocation
         {
@@ -31,7 +33,8 @@ namespace WhisprBeta.Services
 
         public LocationService()
         {
-            App.Status.Set(Status.StatusType.NoUserLocation);
+            statusService = App.StatusService;
+            statusService.Set(StatusType.NoUserLocation);
             StartTracking();
         }
 
@@ -48,18 +51,18 @@ namespace WhisprBeta.Services
             switch (args.Status) {
                 case PositionStatus.Disabled:
                     // The application does not have the right capability or the location master switch is off
-                    App.Status.Set(Status.StatusType.LocationDisabled);
+                    Deployment.Current.Dispatcher.BeginInvoke(() => statusService.Set(StatusType.LocationDisabled));
                     break;
                 case PositionStatus.Initializing:
                     // The geolocator started the tracking operation
-                    Deployment.Current.Dispatcher.BeginInvoke(() => App.Status.Unset(Status.StatusType.LocationDisabled));
+                    Deployment.Current.Dispatcher.BeginInvoke(() => statusService.Unset(StatusType.LocationDisabled));
                     break;
                 case PositionStatus.NoData:
                     // The location service was not able to acquire the location
                     break;
                 case PositionStatus.Ready:
                     // The location service is generating geopositions as specified by the tracking parameters
-                    App.Status.Unset(Status.StatusType.LocationDisabled);
+                    Deployment.Current.Dispatcher.BeginInvoke(() => statusService.Unset(StatusType.LocationDisabled));
                     break;
                 case PositionStatus.NotAvailable:
                     // Not used in WindowsPhone, Windows desktop uses this value to signal that there is no hardware capable to acquire location information
@@ -74,7 +77,7 @@ namespace WhisprBeta.Services
         {
             Deployment.Current.Dispatcher.BeginInvoke(() => {
                 UserLocation = new GeoCoordinate(args.Position.Coordinate.Latitude, args.Position.Coordinate.Longitude);
-                App.Status.Unset(Status.StatusType.NoUserLocation);
+                statusService.Unset(StatusType.NoUserLocation);
             });
         }
     }
