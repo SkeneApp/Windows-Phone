@@ -13,7 +13,6 @@ namespace WhisprBeta
     {
         public delegate void MapButtonClickedEventHandler();
         public event MapButtonClickedEventHandler MapButtonClicked;
-        private readonly List<Message> unsentPosts;
         private readonly MessageService messageService;
         private readonly DispatcherTimer messageUpdateTimer;
 
@@ -25,7 +24,6 @@ namespace WhisprBeta
                 return;
             }
             messageService = App.MessageService;
-            unsentPosts = new List<Message>();
             PendingMessages.Initialize();
             LocalFeed.Initialize();
             RadiusSliderControl.Value = App.Location.FeedRadius;
@@ -89,15 +87,7 @@ namespace WhisprBeta
                 Text = messageText,
                 PublishDelaySec = (int)Toolbar.PublishDelay.TotalSeconds
             };
-            if (App.Location.UserLocation != null)
-            {
-                string returnedId = await messageService.Post(newMessage);
-            }
-            else
-            {
-                // TODO: Remove ability to post messages when location is not known
-                unsentPosts.Add(newMessage);
-            }
+            string returnedId = await messageService.Post(newMessage);
             if (Toolbar.PublishDelay.Minutes == 0)
             {
                 // Add message to immediate list
@@ -131,6 +121,7 @@ namespace WhisprBeta
         {
             // Get whisprs from this new location
             UpdateLocalMessages();
+            Toolbar.PostingEnabled = true;
         }
 
         private void Status_StatusChanged()

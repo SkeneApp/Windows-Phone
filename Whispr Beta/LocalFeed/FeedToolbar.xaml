@@ -34,7 +34,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Margin="0 8 0 -10" Text="139/140" HorizontalAlignment="Center" VerticalAlignment="Top" x:Name="textBlockNumChars" Foreground="#FFB8B8B8"/>
-            <Button Height="75" Margin="-10, -15, -10, 0" Grid.Row="1" VerticalAlignment="Bottom" x:Name="buttonPublish" Click="buttonPublish_Click" Content="Send" BorderThickness="1"  Template="{StaticResource RoundedButtonTemplate}" />
+            <Button Height="75" Margin="-10, -15, -10, 0" Grid.Row="1" VerticalAlignment="Bottom" x:Name="buttonPublish" Click="buttonPublish_Click" Content="Send" BorderThickness="1"  Template="{StaticResource RoundedButtonTemplate}" IsEnabled="False" />
         </Grid>
     </Grid>
 </UserControl>

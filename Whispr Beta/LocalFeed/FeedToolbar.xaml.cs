@@ -38,6 +38,12 @@ namespace WhisprBeta.LocalFeed
             set { DelaySliderControl.Value = value.Minutes; }
         }
 
+        public bool PostingEnabled
+        {
+            get { return buttonPublish.IsEnabled; }
+            set { buttonPublish.IsEnabled = value; }
+        }
+
         public FeedToolbar()
         {
             InitializeComponent();
