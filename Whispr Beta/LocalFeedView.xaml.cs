@@ -14,6 +14,7 @@ namespace WhisprBeta
         public delegate void MapButtonClickedEventHandler();
         public event MapButtonClickedEventHandler MapButtonClicked;
         private readonly IMessageService messageService;
+        private readonly ILocationService locationService;
         private readonly DispatcherTimer messageUpdateTimer;
 
         public LocalFeedView()
@@ -24,9 +25,10 @@ namespace WhisprBeta
                 return;
             }
             messageService = App.MessageService;
+            locationService = App.LocationService;
             PendingMessages.Initialize();
             LocalFeed.Initialize();
-            RadiusSliderControl.Value = App.Location.FeedRadius;
+            //TODO: Save UI values somewhere else // RadiusSliderControl.Value = locationService.FeedRadius;
             RadiusSliderControl.ValueChanged += RadiusSliderControl_ValueChanged;
             Toolbar.MapButtonClicked += Toolbar_MapButtonClicked;
             Toolbar.PublishButtonClicked += Toolbar_PublishButtonClicked;
@@ -47,9 +49,9 @@ namespace WhisprBeta
 
         private void OnNavigatedTo()
         {
-            App.Location.UserLocationChanged += Location_UserLocationChanged;
+            locationService.UserLocationChanged += Location_UserLocationChanged;
             // TODO: Save publish delay somewhere else //Toolbar.PublishDelay = App.Backend.PublishDelay;
-            if (App.Location.UserLocation != null)
+            if (locationService.UserLocation != null)
             {
                  UpdateLocalMessages();
             }
@@ -57,7 +59,7 @@ namespace WhisprBeta
         }
         private void OnNavigatedFrom()
         {
-            App.Location.UserLocationChanged -= Location_UserLocationChanged;
+            locationService.UserLocationChanged -= Location_UserLocationChanged;
             messageUpdateTimer.Stop();
         }
 
@@ -82,8 +84,8 @@ namespace WhisprBeta
         {
             var newMessage = new Message
             {
-                Latitude = App.Location.UserLocation.Latitude,
-                Longitude = App.Location.UserLocation.Longitude,
+                Latitude = locationService.UserLocation.Latitude,
+                Longitude = locationService.UserLocation.Longitude,
                 Text = messageText,
                 PublishDelaySec = (int)Toolbar.PublishDelay.TotalSeconds
             };
@@ -111,8 +113,8 @@ namespace WhisprBeta
 
         private async void UpdateLocalMessages()
         {
-            if (App.Location.UserLocation == null) return;
-            var localWhisprs = (await messageService.Get(App.Location.UserLocation, RadiusSliderControl.Value)).ToList();
+            if (locationService.UserLocation == null) return;
+            var localWhisprs = (await messageService.Get(locationService.UserLocation, RadiusSliderControl.Value)).ToList();
             LocalFeed.UpdateFeed(localWhisprs);
             CheckIfAnyMessages();
         }

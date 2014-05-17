@@ -127,8 +127,9 @@
     <Compile Include="Common\MessageControl.xaml.cs">
       <DependentUpon>MessageControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\ILocationService.cs" />
     <Compile Include="Services\IMessageService.cs" />
-    <Compile Include="Services\Location.cs" />
+    <Compile Include="Services\LocationService.cs" />
     <Compile Include="Services\MessageService.cs" />
     <Compile Include="Common\SliderControl.xaml.cs">
       <DependentUpon>SliderControl.xaml</DependentUpon>

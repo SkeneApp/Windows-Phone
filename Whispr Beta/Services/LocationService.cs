@@ -1,5 +1,4 @@
 ﻿using System.Device.Location;
-using System.Diagnostics;
 using System.Windows;
 using Windows.Devices.Geolocation;
 using WhisprBeta.Common;
@@ -7,51 +6,11 @@ using WhisprBeta.Common;
 namespace WhisprBeta.Services
 {
     public delegate void UserLocationChangedEventHandler();
-    public delegate void FeedLocationChangedEventHandler();
-    public delegate void RadiusChangedEventHandler();
-    public class Location
+
+    public class LocationService : ILocationService
     {
         public event UserLocationChangedEventHandler UserLocationChanged;
-        public event FeedLocationChangedEventHandler FeedLocationChanged;
-        public event RadiusChangedEventHandler RadiusChanged;
-        private int feedRadius = 100;
         private Geolocator geolocator;
-        public int FeedRadius
-        {
-            get
-            {
-                return feedRadius;
-            }
-            set
-            {
-                if (value != feedRadius) {
-                    feedRadius = value;
-                    if (RadiusChanged != null)
-                    {
-                        RadiusChanged();
-                    }
-                }
-            }
-        }
-        private GeoCoordinate feedLocation;
-        public GeoCoordinate FeedLocation
-        {
-            get
-            {
-                return feedLocation;
-            }
-            set
-            {
-                if (value != feedLocation)
-                {
-                    feedLocation = value;
-                    if (FeedLocationChanged != null)
-                    {
-                        FeedLocationChanged();
-                    }
-                }
-            }
-        }
         private GeoCoordinate userLocation;
         public GeoCoordinate UserLocation
         {
@@ -63,10 +22,6 @@ namespace WhisprBeta.Services
             {
                 if (value != userLocation) {
                     userLocation = value;
-                    if (FeedLocation == null)
-                    {
-                        FeedLocation = value;
-                    }
                     if (UserLocationChanged != null) {
                         UserLocationChanged();
                     }
@@ -74,7 +29,7 @@ namespace WhisprBeta.Services
             }
         }
 
-        public Location()
+        public LocationService()
         {
             App.Status.Set(Status.StatusType.NoUserLocation);
             StartTracking();
@@ -86,13 +41,8 @@ namespace WhisprBeta.Services
             geolocator = new Geolocator {DesiredAccuracy = PositionAccuracy.High, MovementThreshold = 50};
             geolocator.StatusChanged += geolocator_StatusChanged;
             geolocator.PositionChanged += geolocator_PositionChanged;
-            Debug.WriteLine("Geolocation: Started tracking");
         }
 
-        // NOTE: geolocator_StatusChanged is currently not used for anything.
-        // One parctical use for it would be detecting if location has been disabled in
-        // phone's settings (PositionStatus.Disabled), so the app would ask user to go
-        // to settings and enable it.
         private void geolocator_StatusChanged(Geolocator sender, StatusChangedEventArgs args)
         {
             switch (args.Status) {
@@ -122,7 +72,6 @@ namespace WhisprBeta.Services
 
         private void geolocator_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
         {
-            Debug.WriteLine("Geolocation: New position");
             Deployment.Current.Dispatcher.BeginInvoke(() => {
                 UserLocation = new GeoCoordinate(args.Position.Coordinate.Latitude, args.Position.Coordinate.Longitude);
                 App.Status.Unset(Status.StatusType.NoUserLocation);

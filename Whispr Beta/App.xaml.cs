@@ -21,7 +21,7 @@ namespace WhisprBeta
         public static PhoneApplicationFrame RootFrame { get; private set; }
 
         public static IMessageService MessageService { get; set; }
-        public static Location Location { get; set; }
+        public static ILocationService LocationService { get; set; }
         public static Status Status { get; set; }
 
         private static bool NoPreviousUserLocation = true;
@@ -62,7 +62,7 @@ namespace WhisprBeta
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
-            Location.UserLocationChanged += Location_UserLocationChanged;
+            LocationService.UserLocationChanged += Location_UserLocationChanged;
         }
 
         private void Location_UserLocationChanged()
@@ -169,7 +169,7 @@ namespace WhisprBeta
 
             Status = new Status();
             MessageService = new MessageService();
-            Location = new Location();
+            LocationService = new LocationService();
 
             // Ensure we don't initialize again
             phoneApplicationInitialized = true;

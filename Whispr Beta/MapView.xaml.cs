@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -17,6 +15,7 @@ namespace WhisprBeta
 
         public event FeedButtonClickedEventHandler FeedButtonClicked;
         private readonly IMessageService messageService;
+        private readonly ILocationService locationService;
         private readonly DispatcherTimer messageUpdateTimer;
         private readonly DispatcherTimer mapDataUpdateTimer;
 
@@ -33,6 +32,7 @@ namespace WhisprBeta
             RemoteFeed.Initialize();
             InitAnimation();
             messageService = App.MessageService;
+            locationService = App.LocationService;
             RadiusSliderControl.ValueChanged += RadiusSliderControl_OnValueChanged;
             RadiusSliderControl.InstantChangeThreshold = 10.0;
             RadiusSliderControl.InstantValueChanged += RadiusSliderControl_InstantValueChanged;
@@ -48,7 +48,7 @@ namespace WhisprBeta
         {
             LayoutRootTransform.X = 0;
             OnNavigatedTo();
-            if (App.Location.UserLocation != null)
+            if (locationService.UserLocation != null)
             {
                 Map.DrawUserLocation(GetMapVisibleHeight());
             }
@@ -64,8 +64,8 @@ namespace WhisprBeta
 
         private void OnNavigatedTo()
         {
-            App.Location.UserLocationChanged += Location_UserLocationChanged;
-            App.Location.FeedLocationChanged += Location_FeedLocationChanged;
+            locationService.UserLocationChanged += Location_UserLocationChanged;
+            Map.FeedLocationChanged += Location_FeedLocationChanged;
             UpdateRemoteMessages();
             messageUpdateTimer.Start();
             mapDataUpdateTimer.Start();
@@ -75,8 +75,8 @@ namespace WhisprBeta
         {
             messageUpdateTimer.Stop();
             mapDataUpdateTimer.Stop();
-            App.Location.UserLocationChanged -= Location_UserLocationChanged;
-            App.Location.FeedLocationChanged -= Location_FeedLocationChanged;
+            locationService.UserLocationChanged -= Location_UserLocationChanged;
+            Map.FeedLocationChanged -= Location_FeedLocationChanged;
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace WhisprBeta
         {
             totalMapHeight = ContentGrid.ActualHeight - Grip.ActualHeight;
             LayoutTransform.Y = totalMapHeight/2;
-            RadiusSliderControl.Value = App.Location.FeedRadius;
+            //TODO: Save UI values somewhere else // RadiusSliderControl.Value = App.LocationService.FeedRadius;
             Map.InitializeMapGraphics();
             Map.LoadMapData(GetMapVisibleHeight());
         }
@@ -187,14 +187,14 @@ namespace WhisprBeta
             {
                 // No longer follow feed location changes if this is hidden.
                 // This is probably the first time the location was aquired.
-                App.Location.UserLocationChanged -= Location_UserLocationChanged;
+                Map.FeedLocationChanged -= Location_UserLocationChanged;
             }
         }
 
         private async void UpdateRemoteMessages()
         {
-            if (App.Location.FeedLocation == null) return;
-            var whisprs = (await messageService.Get(App.Location.FeedLocation, RadiusSliderControl.Value)).ToList();
+            if (Map.FeedLocation == null) return;
+            var whisprs = (await messageService.Get(Map.FeedLocation, RadiusSliderControl.Value)).ToList();
             RemoteFeed.UpdateFeed(whisprs);
         }
 
@@ -211,17 +211,13 @@ namespace WhisprBeta
             {
                 // No longer follow user location changes if this is hidden.
                 // This is probably the first time the location was aquired.
-                App.Location.UserLocationChanged -= Location_UserLocationChanged;
+                locationService.UserLocationChanged -= Location_UserLocationChanged;
             }
         }
 
         private void Toolbar_MyLocationButtonClicked()
         {
             Map.GoToUserLocation(GetMapVisibleHeight());
-            if (App.Location.UserLocation != null)
-            {
-                App.Location.FeedLocation = App.Location.UserLocation;
-            }
         }
 
         private void Toolbar_FeedButtonClicked()
@@ -249,8 +245,8 @@ namespace WhisprBeta
             InitLayout();
             // Enabled some service events just to get initial data.
             // These should be disabled later if map view is not visible.
-            App.Location.UserLocationChanged += Location_UserLocationChanged;
-            App.Location.FeedLocationChanged += Location_FeedLocationChanged;
+            locationService.UserLocationChanged += Location_UserLocationChanged;
+            Map.FeedLocationChanged += Location_FeedLocationChanged;
             UpdateRemoteMessages();
             UpdateMapData();
         }

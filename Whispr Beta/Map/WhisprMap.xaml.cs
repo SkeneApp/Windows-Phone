@@ -11,8 +11,10 @@ using WhisprBeta.Services;
 
 namespace WhisprBeta
 {
+    public delegate void FeedLocationChangedEventHandler();
     public partial class WhisprMap
     {
+        public event FeedLocationChangedEventHandler FeedLocationChanged;
         private const int NumLatestWhisprsOnMap = 200;
         private MapOverlay userLocationOverlay;
         private MapOverlay feedLocationOverlay;
@@ -21,6 +23,28 @@ namespace WhisprBeta
         private Ellipse feedRadiusCircle;
         private const double DefaultZoomLevel = 14;
         private bool firstUserLocation = true;
+        private int currentFeedRadiusMeters;
+        private readonly ILocationService locationService;
+
+        private GeoCoordinate feedLocation;
+        public GeoCoordinate FeedLocation
+        {
+            get
+            {
+                return feedLocation;
+            }
+            set
+            {
+                if (value != feedLocation)
+                {
+                    feedLocation = value;
+                    if (FeedLocationChanged != null)
+                    {
+                        FeedLocationChanged();
+                    }
+                }
+            }
+        }
 
         public double ZoomLevel
         {
@@ -45,6 +69,7 @@ namespace WhisprBeta
         public WhisprMap()
         {
             InitializeComponent();
+            locationService = App.LocationService;
             LockedOnUserLocation = true;
         }
         public void InitializeMapGraphics()
@@ -114,7 +139,7 @@ namespace WhisprBeta
 
         public void GoToUserLocation(double mapVisibleHeight)
         {
-            if (App.Location.UserLocation != null)
+            if (locationService.UserLocation != null)
             {
                 LockedOnUserLocation = true;
                 map.TransformCenter = new Point(0.5, GetMapDisplayedCenterY(mapVisibleHeight));
@@ -122,12 +147,12 @@ namespace WhisprBeta
                 // But if the Center coordinate hasn't changed, the map will not update.
                 // So if center is the same, change it a little bit and change back immediately
                 // to firce the map to refresh.
-                if (Math.Round(map.Center.Latitude, 4) == Math.Round(App.Location.UserLocation.Latitude, 4)
-                    && Math.Round(map.Center.Longitude, 4) == Math.Round(App.Location.UserLocation.Longitude, 4))
+                if (Math.Round(map.Center.Latitude, 4) == Math.Round(locationService.UserLocation.Latitude, 4)
+                    && Math.Round(map.Center.Longitude, 4) == Math.Round(locationService.UserLocation.Longitude, 4))
                 {
-                    map.Center = new GeoCoordinate(App.Location.UserLocation.Latitude - 1, App.Location.UserLocation.Longitude);
+                    map.Center = new GeoCoordinate(locationService.UserLocation.Latitude - 1, locationService.UserLocation.Longitude);
                 }
-                map.Center = App.Location.UserLocation;
+                map.Center = locationService.UserLocation;
                 map.ZoomLevel = DefaultZoomLevel;
             }
         }
@@ -143,37 +168,42 @@ namespace WhisprBeta
 
         public void DrawUserLocation(double mapVisibleHeight)
         {
-            if (App.Location.UserLocation != null && userLocationOverlay != null)
+            if (locationService.UserLocation != null && userLocationOverlay != null)
             {
-                if (LockedOnUserLocation)
-                {
-                    App.Location.FeedLocation = App.Location.UserLocation;
-                }
-                userLocationOverlay.GeoCoordinate = App.Location.UserLocation;
+                userLocationOverlay.GeoCoordinate = locationService.UserLocation;
                 if (firstUserLocation)
                 {
                     firstUserLocation = false;
+                    if (LockedOnUserLocation)
+                    {
+                        FeedLocation = locationService.UserLocation;
+                    }
                     GoToUserLocation(mapVisibleHeight);
                 }
             }
         }
         public void DrawFeedLocation()
         {
-            if (App.Location.FeedLocation != null && feedLocationOverlay != null)
+            if (LockedOnUserLocation && locationService.UserLocation != null)
             {
-                feedRadiusOverlay.GeoCoordinate = App.Location.FeedLocation;
-                feedLocationOverlay.GeoCoordinate = App.Location.FeedLocation;
+                FeedLocation = locationService.UserLocation;
+            }
+            if (FeedLocation != null && feedLocationOverlay != null)
+            {
+                feedRadiusOverlay.GeoCoordinate = FeedLocation;
+                feedLocationOverlay.GeoCoordinate = FeedLocation;
             }
         }
         public void DrawFeedRadius()
         {
-            DrawFeedRadius(App.Location.FeedRadius);
+            DrawFeedRadius(currentFeedRadiusMeters);
         }
         public void DrawFeedRadius(int radius)
         {
-            if (App.Location.FeedLocation != null && feedRadiusCircle != null)
+            currentFeedRadiusMeters = radius;
+            if (FeedLocation != null && feedRadiusCircle != null)
             {
-                double circleRadius = MetersToCircleRadius(App.Location.FeedLocation, radius);
+                double circleRadius = MetersToCircleRadius(FeedLocation, radius);
                 feedRadiusCircle.Height = circleRadius * 2;
                 feedRadiusCircle.Width = circleRadius * 2;
             }
@@ -240,8 +270,7 @@ namespace WhisprBeta
         {
             LockedOnUserLocation = false;
             GeoCoordinate position = map.ConvertViewportPointToGeoCoordinate(e.GetPosition(map));
-            App.Location.FeedLocation = position;
-
+            FeedLocation = position;
         }
     }
 }

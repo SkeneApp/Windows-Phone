@@ -5,7 +5,7 @@ using WhisprBeta.Common;
 
 namespace WhisprBeta.Services
 {
-    interface IMessageService
+    public interface IMessageService
     {
         Task<IEnumerable<Message>> Get(GeoCoordinate location, int radiusMeters);
         Task<string> Post(Message newMessage);
