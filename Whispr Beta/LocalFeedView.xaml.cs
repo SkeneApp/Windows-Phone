@@ -82,13 +82,20 @@ namespace WhisprBeta
 
         private async void Toolbar_PublishButtonClicked(string messageText)
         {
-            var newMessage = new Message(App.Location.UserLocation, messageText, (int)Toolbar.PublishDelay.TotalSeconds);
+            var newMessage = new Message
+            {
+                Latitude = App.Location.UserLocation.Latitude,
+                Longitude = App.Location.UserLocation.Longitude,
+                Text = messageText,
+                PublishDelaySec = (int)Toolbar.PublishDelay.TotalSeconds
+            };
             if (App.Location.UserLocation != null)
             {
                 string returnedId = await messageService.Post(newMessage);
             }
             else
             {
+                // TODO: Remove ability to post messages when location is not known
                 unsentPosts.Add(newMessage);
             }
             if (Toolbar.PublishDelay.Minutes == 0)

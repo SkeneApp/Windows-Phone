@@ -116,9 +116,9 @@ namespace WhisprBeta.Common
         {
             isHidden = false;
             InitializeComponent();
-            Text = message.text;
-            PublishDate = Utils.UnixTimeStampToDateTime(message.pubTime);
-            Id = message.id;
+            Text = message.Text;
+            PublishDate = Utils.UnixTimeStampToDateTime(message.PublishTime);
+            Id = message.Id;
         }
 
         public void Hide()

@@ -187,7 +187,7 @@ namespace WhisprBeta
                 {
                     if (i < latestWhisprsOverlays.Length)
                     {
-                        latestWhisprsOverlays[i].GeoCoordinate = new GeoCoordinate(post.latitude, post.longitude);
+                        latestWhisprsOverlays[i].GeoCoordinate = new GeoCoordinate(post.Latitude, post.Longitude);
                         latestWhisprsOverlays[i].Content = new Ellipse()
                         {
                             Fill = new SolidColorBrush(Colors.Red),

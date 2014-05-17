@@ -121,7 +121,7 @@ namespace WhisprBeta.Services
                 // Change server timestamp to local time stamp
                 foreach (var msg in messages)
                 {
-                    msg.pubTime += (long)serverTimeDiffSeconds;
+                    msg.PublishTime += (long)serverTimeDiffSeconds;
                 }
             }
         } 
