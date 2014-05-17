@@ -1,5 +1,4 @@
-﻿using System;
-using System.Device.Location;
+﻿using System.Device.Location;
 using System.Diagnostics;
 using System.Windows;
 using Windows.Devices.Geolocation;
@@ -87,7 +86,7 @@ namespace WhisprBeta.Services
             geolocator = new Geolocator {DesiredAccuracy = PositionAccuracy.High, MovementThreshold = 50};
             geolocator.StatusChanged += geolocator_StatusChanged;
             geolocator.PositionChanged += geolocator_PositionChanged;
-            System.Diagnostics.Debug.WriteLine("Geolocation: Started tracking");
+            Debug.WriteLine("Geolocation: Started tracking");
         }
 
         // NOTE: geolocator_StatusChanged is currently not used for anything.
@@ -123,49 +122,11 @@ namespace WhisprBeta.Services
 
         private void geolocator_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
         {
-            System.Diagnostics.Debug.WriteLine("Geolocation: New position");
+            Debug.WriteLine("Geolocation: New position");
             Deployment.Current.Dispatcher.BeginInvoke(() => {
                 UserLocation = new GeoCoordinate(args.Position.Coordinate.Latitude, args.Position.Coordinate.Longitude);
                 App.Status.Unset(Status.StatusType.NoUserLocation);
             });
-        }
-    }
-    public class WBoundingBox
-    {
-        public GeoCoordinate Min { get; set; }
-        public GeoCoordinate Max { get; set; }
-        public WBoundingBox()
-        {
-            this.Min = new GeoCoordinate();
-            this.Max = new GeoCoordinate();
-        }
-        public WBoundingBox(WBoundingBox box)
-        {
-            this.Min = new GeoCoordinate(box.Min.Latitude, box.Min.Longitude);
-            this.Max = new GeoCoordinate(box.Max.Latitude, box.Max.Longitude);
-        }
-        public WBoundingBox(GeoCoordinate min, GeoCoordinate max)
-        {
-            this.Min = new GeoCoordinate(min.Latitude, min.Longitude);
-            this.Max = new GeoCoordinate(max.Latitude, max.Longitude);
-        }
-        public WBoundingBox(double minLat, double minLng, double maxLat, double maxLng)
-        {
-            this.Min = new GeoCoordinate(minLat, minLng);
-            this.Max = new GeoCoordinate(maxLat, maxLng);
-        }
-        public static WBoundingBox FromRadius(GeoCoordinate pos, int radiusMeters)
-        {
-            double latRadian = Utils.ToRadians(pos.Latitude);
-        	const double degLatKm = 110.574235; 
-        	double degLongKm = 110.572833 * Math.Cos(latRadian);
-            double deltaLat = radiusMeters / 1000.0 / degLatKm;
-            double deltaLong = radiusMeters / 1000.0 / degLongKm;
-            double minLat = pos.Latitude - deltaLat;
-            double minLong = pos.Longitude - deltaLong;
-            double maxLat = pos.Latitude + deltaLat;
-            double maxLong = pos.Longitude + deltaLong;
-            return new WBoundingBox(minLat, minLong, maxLat, maxLong);
         }
     }
 }

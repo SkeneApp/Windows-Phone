@@ -20,7 +20,7 @@ namespace WhisprBeta
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
 
-        public static MessageService MessageService { get; set; }
+        public static IMessageService MessageService { get; set; }
         public static Location Location { get; set; }
         public static Status Status { get; set; }
 

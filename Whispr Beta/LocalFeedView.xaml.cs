@@ -13,7 +13,7 @@ namespace WhisprBeta
     {
         public delegate void MapButtonClickedEventHandler();
         public event MapButtonClickedEventHandler MapButtonClicked;
-        private readonly MessageService messageService;
+        private readonly IMessageService messageService;
         private readonly DispatcherTimer messageUpdateTimer;
 
         public LocalFeedView()

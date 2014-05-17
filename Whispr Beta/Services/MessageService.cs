@@ -11,13 +11,13 @@ using WhisprBeta.Common;
 
 namespace WhisprBeta.Services
 {
-    public class MessageService
+    public class MessageService : IMessageService
     {
         private long? serverTimeDiffSeconds;
         private const string UrlBase = "http://whispr.outi.me/api/{0}";
         private const string GetParameters = "?json=1&random={0}&timestamp=0";
 
-        public async Task<IEnumerable<Message>> Get(GeoCoordinate location, int radius)
+        public async Task<IEnumerable<Message>> Get(GeoCoordinate location, int radiusMeters)
         {
             IEnumerable<Message> result = new List<Message>();
             try
@@ -26,7 +26,7 @@ namespace WhisprBeta.Services
                 {
                     Timeout = TimeSpan.FromSeconds(5)
                 };
-                var area = WBoundingBox.FromRadius(location, radius);
+                var area = WBoundingBox.FromRadius(location, radiusMeters);
                 var locationStr = string.Format("&min_lat={0}&min_long={1}&max_lat={2}&max_long={3}",
                     area.Min.Latitude.ToString(CultureInfo.InvariantCulture),
                     area.Min.Longitude.ToString(CultureInfo.InvariantCulture),

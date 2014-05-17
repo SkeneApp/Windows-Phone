@@ -16,7 +16,7 @@ namespace WhisprBeta
         public delegate void FeedButtonClickedEventHandler();
 
         public event FeedButtonClickedEventHandler FeedButtonClicked;
-        private readonly MessageService messageService;
+        private readonly IMessageService messageService;
         private readonly DispatcherTimer messageUpdateTimer;
         private readonly DispatcherTimer mapDataUpdateTimer;
 
