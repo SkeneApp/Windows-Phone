@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Device.Location;
+using System.Diagnostics;
 using System.Windows;
 using Windows.Devices.Geolocation;
 using WhisprBeta.Common;
@@ -42,7 +43,8 @@ namespace WhisprBeta.Services
             }
             set
             {
-                if (value != feedLocation) {
+                if (value != feedLocation)
+                {
                     feedLocation = value;
                     if (FeedLocationChanged != null)
                     {
@@ -62,7 +64,8 @@ namespace WhisprBeta.Services
             {
                 if (value != userLocation) {
                     userLocation = value;
-                    if (FeedLocation == null) {
+                    if (FeedLocation == null)
+                    {
                         FeedLocation = value;
                     }
                     if (UserLocationChanged != null) {

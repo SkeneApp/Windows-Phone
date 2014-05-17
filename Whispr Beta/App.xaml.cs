@@ -20,7 +20,7 @@ namespace WhisprBeta
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
 
-        public static Backend Backend { get; set; }
+        public static MessageService MessageService { get; set; }
         public static Location Location { get; set; }
         public static Status Status { get; set; }
 
@@ -168,7 +168,7 @@ namespace WhisprBeta
             RootFrame.Navigated += CheckForResetNavigation;
 
             Status = new Status();
-            Backend = new Backend();
+            MessageService = new MessageService();
             Location = new Location();
 
             // Ensure we don't initialize again

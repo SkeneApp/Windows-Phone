@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
+using System.Windows.Threading;
 using WhisprBeta.Common;
+using WhisprBeta.Services;
 
 namespace WhisprBeta
 {
@@ -11,6 +14,8 @@ namespace WhisprBeta
         public delegate void MapButtonClickedEventHandler();
         public event MapButtonClickedEventHandler MapButtonClicked;
         private readonly List<Message> unsentPosts;
+        private readonly MessageService messageService;
+        private readonly DispatcherTimer messageUpdateTimer;
 
         public LocalFeedView()
         {
@@ -19,6 +24,7 @@ namespace WhisprBeta
             {
                 return;
             }
+            messageService = App.MessageService;
             unsentPosts = new List<Message>();
             PendingMessages.Initialize();
             LocalFeed.Initialize();
@@ -26,8 +32,9 @@ namespace WhisprBeta
             RadiusSliderControl.ValueChanged += RadiusSliderControl_ValueChanged;
             Toolbar.MapButtonClicked += Toolbar_MapButtonClicked;
             Toolbar.PublishButtonClicked += Toolbar_PublishButtonClicked;
-            Toolbar.PublishDelayChanged += Toolbar_PublishDelayChanged;
             LocalFeed.Tap += LocalFeed_Tap;
+            messageUpdateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };
+            messageUpdateTimer.Tick += (sender, e) => UpdateLocalMessages();
         }
 
         public void Show()
@@ -42,18 +49,18 @@ namespace WhisprBeta
 
         private void OnNavigatedTo()
         {
-            App.Backend.LocalWhisprsUpdateEnabled = true;
-            App.Backend.LocalWhisprsUpdated += Backend_LocalWhisprsUpdated;
-            App.Location.RadiusChanged += Location_RadiusChanged;
             App.Location.UserLocationChanged += Location_UserLocationChanged;
-            Toolbar.PublishDelay = App.Backend.PublishDelay;
+            // TODO: Save publish delay somewhere else //Toolbar.PublishDelay = App.Backend.PublishDelay;
+            if (App.Location.UserLocation != null)
+            {
+                 UpdateLocalMessages();
+            }
+            messageUpdateTimer.Start();
         }
         private void OnNavigatedFrom()
         {
-            App.Backend.LocalWhisprsUpdated -= Backend_LocalWhisprsUpdated;
-            App.Location.RadiusChanged -= Location_RadiusChanged;
             App.Location.UserLocationChanged -= Location_UserLocationChanged;
-            App.Backend.LocalWhisprsUpdateEnabled = false;
+            messageUpdateTimer.Stop();
         }
 
         private void CheckIfAnyMessages()
@@ -73,23 +80,18 @@ namespace WhisprBeta
             Toolbar.HideNewMessagePanel();
         }
 
-        private void Toolbar_PublishDelayChanged(TimeSpan delay)
+        private async void Toolbar_PublishButtonClicked(string messageText)
         {
-            App.Backend.PublishDelay = delay;
-        }
-
-        private void Toolbar_PublishButtonClicked(string messageText)
-        {
-            Message newMessage = new Message(App.Location.UserLocation, messageText, (int)App.Backend.PublishDelay.TotalSeconds);
+            var newMessage = new Message(App.Location.UserLocation, messageText, (int)Toolbar.PublishDelay.TotalSeconds);
             if (App.Location.UserLocation != null)
             {
-                App.Backend.PostWhispr(newMessage);
+                string returnedId = await messageService.Post(newMessage);
             }
             else
             {
                 unsentPosts.Add(newMessage);
             }
-            if (App.Backend.PublishDelay.Minutes == 0)
+            if (Toolbar.PublishDelay.Minutes == 0)
             {
                 // Add message to immediate list
                 LocalFeed.ImmediateListAdd(newMessage);
@@ -110,13 +112,10 @@ namespace WhisprBeta
             Hide();
         }
 
-        private void Location_RadiusChanged()
+        private async void UpdateLocalMessages()
         {
-            App.Backend.GetLocalWhisprs();
-        }
-
-        private void Backend_LocalWhisprsUpdated(List<Message> localWhisprs)
-        {
+            if (App.Location.UserLocation == null) return;
+            var localWhisprs = (await messageService.Get(App.Location.UserLocation, RadiusSliderControl.Value)).ToList();
             LocalFeed.UpdateFeed(localWhisprs);
             CheckIfAnyMessages();
         }
@@ -124,23 +123,11 @@ namespace WhisprBeta
         private void Location_UserLocationChanged()
         {
             // Get whisprs from this new location
-            App.Backend.GetLocalWhisprs();
-
-            // Check if there are any posts that were not sent because location was unknown
-            if (unsentPosts.Count > 0) {
-                // There are unsent posts. Set their location and send them
-                foreach (Message post in unsentPosts) {
-                    post.latitude = App.Location.UserLocation.Latitude;
-                    post.longitude = App.Location.UserLocation.Longitude;
-                    App.Backend.PostWhispr(post);
-                }
-                unsentPosts.Clear();
-            }
+            UpdateLocalMessages();
         }
 
         private void Status_StatusChanged()
         {
-           
             if (App.Status.StatusClear) {
                 StatusOverlay.Hide();
             } else {
@@ -156,7 +143,7 @@ namespace WhisprBeta
         private void RadiusSliderControl_ValueChanged(int value)
         {
             LocalFeed.OutdateFeed();
-            App.Location.FeedRadius = value;
+            UpdateLocalMessages();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

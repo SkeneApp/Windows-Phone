@@ -60,8 +60,7 @@ namespace WhisprBeta.Common
             {
                 if (unixTimeStamp != value) {
                     unixTimeStamp = value;
-                    DateTime dt = Utils.UnixTimeStampToDateTime(unixTimeStamp);
-                    publishDate = dt + App.Backend.ServerTimeDiff;
+                    publishDate = Utils.UnixTimeStampToDateTime(unixTimeStamp);
                     Show();
                 }
             }
@@ -118,7 +117,7 @@ namespace WhisprBeta.Common
             isHidden = false;
             InitializeComponent();
             Text = message.text;
-            PublishDate = Utils.UnixTimeStampToDateTime(message.pubTime) + App.Backend.ServerTimeDiff;
+            PublishDate = Utils.UnixTimeStampToDateTime(message.pubTime);
             Id = message.id;
         }
 
