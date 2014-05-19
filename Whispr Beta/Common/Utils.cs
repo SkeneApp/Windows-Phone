@@ -8,12 +8,11 @@ namespace WhisprBeta.Common
 
         public static long DateTimeToUnixTimestamp(DateTime dateTime)
         {
-            return (long)(dateTime - new DateTime(1970, 1, 1).ToLocalTime()).TotalSeconds;
+            return (long)(dateTime.ToUniversalTime() - _epochDateTime).TotalSeconds;
         }
         public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
         {
-            DateTime resultDateTime = _epochDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
-            return resultDateTime;
+            return _epochDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
         }
         public static long UnixTimeNow()
         {

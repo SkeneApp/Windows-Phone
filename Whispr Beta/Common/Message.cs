@@ -1,45 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Device.Location;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace WhisprBeta.Common
 {
     public class Message
     {
-        public ulong id { get; set; }
-        public double latitude { get; set; }
-        public double longitude { get; set; }
-        public string text { get; set; }
-        public long pubTime { get; set; }
-        public int pubDelaySec { get; set; }
+        [JsonProperty("id")]
+        public ulong Id { get; set; }
 
-        public Message()
-        {
-        }
+        [JsonProperty("latitude")]
+        public double Latitude { get; set; }
 
-        public Message(GeoCoordinate pos, string text, int pubDelaySec)
-        {
-            if (pos != null) {
-                this.latitude = pos.Latitude;
-                this.longitude = pos.Longitude;
-            }
-            this.text = text;
-            this.pubDelaySec = pubDelaySec;
-        }
+        [JsonProperty("longitude")]
+        public double Longitude { get; set; }
 
-        public static List<Message> Deserialize(string jsonString)
-        {
-            List<Message> posts = null;
-            try
-            {
-                posts = JsonConvert.DeserializeObject<List<Message>>(jsonString);
-            }
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine("Deserialize(): Exception: " + e.Message);
-            }
-            return posts;
-        }
+        [JsonProperty("text")]
+        public string Text { get; set; }
+
+        [JsonProperty("pubTime")]
+        public long PublishTime { get; set; }
+
+        [JsonProperty("pubDelaySec")]
+        public int PublishDelaySec { get; set; }
     }
 }

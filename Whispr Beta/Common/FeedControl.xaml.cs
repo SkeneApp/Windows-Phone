@@ -48,11 +48,11 @@ namespace WhisprBeta
                 {
                     // There are still whisprs to display. Display the next one:
                     Message message = whisprs[whispIdx];
-                    if (postUi.Id != message.id)
+                    if (postUi.Id != message.Id)
                     {
-                        postUi.Id = message.id;
-                        postUi.Text = message.text;
-                        postUi.UnixTimeStamp = message.pubTime;
+                        postUi.Id = message.Id;
+                        postUi.Text = message.Text;
+                        postUi.UnixTimeStamp = message.PublishTime;
                     }
                     postUi.UpdatePublishTimeText();
                     postUi.IsImmediate = false;
@@ -105,7 +105,7 @@ namespace WhisprBeta
                 if (i < immediateList.Count)
                 {
                     Message message = immediateList[i];
-                    postUi.Text = message.text;
+                    postUi.Text = message.Text;
                     postUi.IsImmediate = true;
                     postUi.Show();
                 }
@@ -127,7 +127,7 @@ namespace WhisprBeta
                     {
                         foreach (Message receivedPost in whisprs)
                         {
-                            if (receivedPost.text == immediatePost.text)
+                            if (receivedPost.Text == immediatePost.Text)
                             {
                                 // This message has been received from server, so remove it from the immediate list
                                 postsToRemove.Add(immediatePost);

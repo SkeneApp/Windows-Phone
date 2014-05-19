@@ -20,9 +20,9 @@ namespace WhisprBeta
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
 
-        public static Backend Backend { get; set; }
-        public static Location Location { get; set; }
-        public static Status Status { get; set; }
+        public static IMessageService MessageService { get; set; }
+        public static ILocationService LocationService { get; set; }
+        public static IStatusService StatusService { get; set; }
 
         private static bool NoPreviousUserLocation = true;
 
@@ -62,7 +62,7 @@ namespace WhisprBeta
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
-            Location.UserLocationChanged += Location_UserLocationChanged;
+            LocationService.UserLocationChanged += Location_UserLocationChanged;
         }
 
         private void Location_UserLocationChanged()
@@ -70,7 +70,7 @@ namespace WhisprBeta
             if (NoPreviousUserLocation)
             {
                 NoPreviousUserLocation = false;
-                Status.Set(Status.StatusType.LoadingWhisprs);
+                StatusService.Set(StatusType.LoadingWhisprs);
             }
         }
 
@@ -167,9 +167,9 @@ namespace WhisprBeta
             // Handle reset requests for clearing the backstack
             RootFrame.Navigated += CheckForResetNavigation;
 
-            Status = new Status();
-            Backend = new Backend();
-            Location = new Location();
+            StatusService = new StatusService();
+            MessageService = new MessageService();
+            LocationService = new LocationService();
 
             // Ensure we don't initialize again
             phoneApplicationInitialized = true;

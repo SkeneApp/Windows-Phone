@@ -27,9 +27,9 @@ namespace WhisprBeta.LocalFeed
 
         public void Add(Message message)
         {
-            if (message.pubTime == 0)
+            if (message.PublishTime == 0)
             {
-                message.pubTime = Utils.UnixTimeNow() + message.pubDelaySec;
+                message.PublishTime = Utils.UnixTimeNow() + message.PublishDelaySec;
             }
             List.Add(message);
             if (!timer.IsEnabled)
@@ -49,7 +49,7 @@ namespace WhisprBeta.LocalFeed
                 {
                     // If message should have been posted already, remove it from the pending list.
                     // Give 3 sec extra, just because there is always some deley of sending message to server.
-                    if (timeNow > (pendingPost.pubTime + 3))
+                    if (timeNow > (pendingPost.PublishTime + 3))
                     {
                         // Post's time has passed, remove it from the pending list
                         postsToRemove.Add(pendingPost);
